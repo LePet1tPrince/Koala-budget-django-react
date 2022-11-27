@@ -1,6 +1,10 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+from .models import Trxn
+from .serializers import TrxnSerializer
+# from api import serializers
+
 
 @api_view(['GET'])
 def getRoutes(request):
@@ -38,3 +42,15 @@ def getRoutes(request):
         },
     ]
     return Response(routes)
+
+@api_view(['GET'])
+def getFeed(request):
+    feed = Trxn.objects.all() 
+    serializer = TrxnSerializer(feed, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def getTrxn(request, pk):
+    trxn = Trxn.objects.get(id=pk) 
+    serializer = TrxnSerializer(trxn, many=False)
+    return Response(serializer.data)
