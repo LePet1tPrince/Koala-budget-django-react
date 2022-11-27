@@ -1,12 +1,25 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from datetime import datetime
+from django.db.models import Q
+
+class Account(models.Model):
+    class AccountTypes(models.TextChoices):
+        Asset = 'Asset'
+        Liability = 'Liability'
+        Equity = 'Equity'
+        Income = 'Income'
+        Expense = 'Expense'
+
+    accName = models.CharField(max_length=50)
+    accNum = models.IntegerField()
+    accType = models.CharField(max_length=10, choices=AccountTypes.choices)
+
+    def __str__(self):
+        return self.accName
 
 class Trxn(models.Model):
     
-    class AccountChoices(models.TextChoices):
-        CreditCard = 'CC', _('Credit Card')
-        Chequing = 'CQ', _('Chequing')
     
     class CategoryChoices(models.TextChoices):
         Rent = 'RT', _('Rent')
@@ -15,16 +28,21 @@ class Trxn(models.Model):
     date = models.DateField(auto_now_add=False)
     updated = models.DateTimeField(auto_now=True)
     amount = models.DecimalField(max_digits=10,decimal_places=2)
-    account = models.CharField(
-        max_length=2,
-        choices=AccountChoices.choices,
-        default=AccountChoices.CreditCard,
+    account = models.ForeignKey(Account,
+        blank=True, #change to false
+        null=True,#change to false
+        on_delete=models.CASCADE,
+        limit_choices_to=Q(accType='Asset') | Q(accType='Liability') | Q(accType='Equity'),
+        related_name='account',
         )
 
-    category = models.CharField(
-        max_length=2,
-        choices=CategoryChoices.choices,
-        default=None,
+    category = models.ForeignKey(Account,
+        blank=True,#change to false
+        null=True,#change to false
+        on_delete=models.CASCADE,
+        limit_choices_to=Q(accType='Expense') | Q(accType='Income'),
+        related_name='category',
+
     )
 
     notes = models.CharField(
