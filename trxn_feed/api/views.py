@@ -11,31 +11,31 @@ def getRoutes(request):
 
     routes = [
         {
-            'Endpoint': '/trxns/',
+            'Endpoint': '/feed/',
             'method': 'GET',
             'body': None,
             'description': 'Returns an array of transactions'
         },
         {
-            'Endpoint': '/trxns/id',
+            'Endpoint': '/feed/id',
             'method': 'GET',
             'body': None,
             'description': 'Returns a single transaction object'
         },
         {
-            'Endpoint': '/trxns/create/',
+            'Endpoint': '/feed/create/',
             'method': 'POST',
             'body': {'body': ""},
             'description': 'Creates new transaction with data sent in post request'
         },
         {
-            'Endpoint': '/trxns/id/update/',
+            'Endpoint': '/feed/id/update/',
             'method': 'PUT',
             'body': {'body': ""},
             'description': 'Creates an existing transaction with data sent in post request'
         },
         {
-            'Endpoint': '/trxns/id/delete/',
+            'Endpoint': '/feed/id/delete/',
             'method': 'DELETE',
             'body': None,
             'description': 'Deletes and existing transaction'

@@ -51,4 +51,4 @@ class Trxn(models.Model):
     )
 
     def __str__(self):
-        return self.date.strftime("%d %b, %Y") + " - " + str(self.amount) + " - " + self.category + " - " + self.notes
+        return self.date.strftime("%d %b, %Y") + " - " + str(self.amount) + " - " + str(self.category) + " - " + self.notes
