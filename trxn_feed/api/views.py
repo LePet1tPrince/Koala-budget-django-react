@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Trxn
-from .serializers import TrxnSerializer
+from .models import Trxn, Account
+from .serializers import TrxnSerializer, AccountSerializer
 # from api import serializers
 
 
@@ -53,4 +53,18 @@ def getFeed(request):
 def getTrxn(request, pk):
     trxn = Trxn.objects.get(id=pk) 
     serializer = TrxnSerializer(trxn, many=False)
+    return Response(serializer.data)
+
+#Accounts
+@api_view(['GET'])
+def getAccounts(request):
+    feed = Account.objects.all() 
+    serializer = AccountSerializer(feed, many=True)
+    return Response(serializer.data)
+
+#Accounts
+@api_view(['GET'])
+def getAccount(request, pk):
+    account = Account.objects.get(id=pk) 
+    serializer = AccountSerializer(account, many=False)
     return Response(serializer.data)
