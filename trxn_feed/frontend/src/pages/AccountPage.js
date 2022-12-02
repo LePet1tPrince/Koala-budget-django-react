@@ -11,38 +11,72 @@ const AccountPage = () => {
     }, [])
 
     let getAccounts = async () => {
-        let response = await fetch('http://127.0.0.1:8000/api/accounts/')
+        let response = await fetch('/api/accounts/')
         let data = await response.json()
         setAccounts(data)
         console.log(Accounts)
     }
 
+    var ownAccounts = Accounts.filter(function (account) {
+      return account.accType == "Asset" | account.accType == "Liability"
+    })
+
+    var spendAccounts = Accounts.filter(function (account) {
+      return account.accType == "Income" | account.accType == "Expense"
+    })
+
   return (
     <div>
-        <div className='feed-list'>
+        <div className='feed-list sidebar-margin'>
             <div className="p-5 m-5">
-        <table className="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Account Number</th>
-      <th scope="col">Account Name</th>
-      <th scope="col">Account Type</th>
+              <h2>Owner Accounts</h2>
+                <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Account Number</th>
+                      <th scope="col">Account Name</th>
+                      <th scope="col">Account Type</th>
 
-    </tr>
-  </thead>
-  <tbody>
-  {Accounts.map((acc, index) => (
-                <tr key={index}>
-                    <th scope="row">{acc.accNum}</th>
-                    <th>{acc.accName}</th>
-                    <th>{acc.accType}</th>
-                </tr>
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {ownAccounts.map((acc, index) => (
+                                <tr key={index}>
+                                    <th scope="row">{acc.accNum}</th>
+                                    <th>{acc.accName}</th>
+                                    <th>{acc.accType}</th>
+                                </tr>
 
-            ))}
-    
-  </tbody>
-</table>
-</div>
+                            ))}
+                    
+                  </tbody>
+                </table>
+
+          </div>
+          <div className="p-5 m-5">
+            <h2>Spend Accounts</h2>
+            <table className="table table-striped">
+                  <thead>
+                    <tr>
+                      <th scope="col">Account Number</th>
+                      <th scope="col">Account Name</th>
+                      <th scope="col">Account Type</th>
+
+                    </tr>
+                  </thead>
+                  <tbody>
+                  {spendAccounts.map((acc, index) => (
+                                <tr key={index}>
+                                    <th scope="row">{acc.accNum}</th>
+                                    <th>{acc.accName}</th>
+                                    <th>{acc.accType}</th>
+                                </tr>
+
+                            ))}
+                    
+                  </tbody>
+                </table>
+          </div>
         </div>
     </div>
   )

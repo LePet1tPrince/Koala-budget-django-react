@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TrxnItem from '../components/TrxnItem';
+import TrxnFeed from '../components/TrxnFeed';
 
 
 const FeedPage = () => {
@@ -12,17 +13,17 @@ const FeedPage = () => {
     }, [])
 
     let getFeed = async () => {
-        let response = await fetch('http://127.0.0.1:8000/api/feed/')
+        let response = await fetch('/api/feed/')
         let data = await response.json()
         setFeed(data)
         console.log(feed)
     }
 
   return (
-    <div>
+    <div className="sidebar-margin">
         <div className='feed-list'>
             <div className="p-5 m-5">
-        <table className="table table-striped">
+            <table className="table table-striped">
   <thead>
     <tr>
       <th scope="col">Date</th>
@@ -30,23 +31,21 @@ const FeedPage = () => {
       <th scope="col">Account</th>
       <th scope="col">Category</th>
       <th scope="col">Notes</th>
+      <th scope="col">See More</th>
 
     </tr>
   </thead>
   <tbody>
-  {feed.map((trxn, index) => (
-                <tr key={index}>
-                    <th scope="row">{trxn.date}</th>
-                    <th>{trxn.amount}</th>
-                    <th>{trxn.account}</th>
-                    <th>{trxn.category}</th>
-                    <th>{trxn.notes}</th>
-                </tr>
+    {feed.map((trxn, index) => (
+      
+      <TrxnFeed key={index} trxn={trxn} index={index} />
+      
 
             ))}
     
   </tbody>
 </table>
+        
 </div>
         </div>
     </div>
