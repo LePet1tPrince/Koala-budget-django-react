@@ -18,11 +18,11 @@ const AccountPage = () => {
     }
 
     var ownAccounts = Accounts.filter(function (account) {
-      return account.accType == "Asset" | account.accType == "Liability"
+      return account.type === "Own"
     })
 
     var spendAccounts = Accounts.filter(function (account) {
-      return account.accType == "Income" | account.accType == "Expense"
+      return account.type === "Flow"
     })
 
   return (
@@ -36,15 +36,18 @@ const AccountPage = () => {
                       <th scope="col">Account Number</th>
                       <th scope="col">Account Name</th>
                       <th scope="col">Account Type</th>
+                      <th scope="col">Account Sub-Type</th>
+
 
                     </tr>
                   </thead>
                   <tbody>
                   {ownAccounts.map((acc, index) => (
                                 <tr key={index}>
-                                    <th scope="row">{acc.accNum}</th>
-                                    <th>{acc.accName}</th>
-                                    <th>{acc.accType}</th>
+                                    <th scope="row">{acc.num}</th>
+                                    <th>{acc.name}</th>
+                                    <th>{acc.type}</th>                           
+                                    <th>{acc.subType}</th>
                                 </tr>
 
                             ))}
@@ -61,15 +64,18 @@ const AccountPage = () => {
                       <th scope="col">Account Number</th>
                       <th scope="col">Account Name</th>
                       <th scope="col">Account Type</th>
+                      <th scope="col">Account Sub-Type</th>
+
 
                     </tr>
                   </thead>
                   <tbody>
                   {spendAccounts.map((acc, index) => (
                                 <tr key={index}>
-                                    <th scope="row">{acc.accNum}</th>
-                                    <th>{acc.accName}</th>
-                                    <th>{acc.accType}</th>
+                                    <th scope="row">{acc.num}</th>
+                                    <th>{acc.name}</th>
+                                    <th>{acc.type}</th>                           
+                                    <th>{acc.subType}</th>
                                 </tr>
 
                             ))}

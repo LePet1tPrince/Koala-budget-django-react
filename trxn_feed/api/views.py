@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from .models import Trxn, Account
-from .serializers import TrxnSerializer, AccountSerializer
+from .models import Trxn, Account, Goal, Budget
+from .serializers import TrxnSerializer, AccountSerializer, GoalSerializer, BudgetSerializer
 # from api import serializers
 
 
@@ -43,28 +43,48 @@ def getRoutes(request):
     ]
     return Response(routes)
 
+#transaction feed
 @api_view(['GET'])
 def getFeed(request):
     feed = Trxn.objects.all() 
     serializer = TrxnSerializer(feed, many=True)
     return Response(serializer.data)
 
+#single transaction
 @api_view(['GET'])
 def getTrxn(request, pk):
     trxn = Trxn.objects.get(id=pk) 
     serializer = TrxnSerializer(trxn, many=False)
     return Response(serializer.data)
 
-#Accounts
+#Accounts feed
 @api_view(['GET'])
 def getAccounts(request):
     feed = Account.objects.all() 
     serializer = AccountSerializer(feed, many=True)
     return Response(serializer.data)
 
-#Accounts
+#single account
 @api_view(['GET'])
 def getAccount(request, pk):
     account = Account.objects.get(id=pk) 
     serializer = AccountSerializer(account, many=False)
     return Response(serializer.data)
+
+#Goals View
+@api_view(['GET'])
+def getGoals(request):
+    goals = Goal.objects.all() 
+    serializer = GoalSerializer(goals, many=True)
+    return Response(serializer.data)
+
+
+@api_view(['PUT'])
+def updateTrxn(request, pk):
+    data = request.data
+    trxn = Trxn.objects.get(id=pk)
+    serlializer = TrxnSerializer(instance=trxn, data=data)
+    if serlializer.is_valid():
+        serlializer.save()
+    
+    return Response(serlializer.data)

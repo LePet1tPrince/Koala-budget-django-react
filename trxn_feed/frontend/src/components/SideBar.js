@@ -10,9 +10,13 @@ const SideBar = () => {
         document.getElementById("mySidebar").style.display = "none";
       }
   return (
-        <div id="mySidebar" class="sidebar">
-  <a class="active" href="/">Transaction Feed</a>
+        <div id="mySidebar" className="sidebar">
+  <a className="active" href="/">Transaction Feed</a>
   <a href="/accounts">Accounts</a>
+  <a href="/goals">Goals</a>
+  <a href="/dashboard">Dashboard</a>
+  
+
 </div>
 
 

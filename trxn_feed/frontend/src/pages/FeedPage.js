@@ -16,8 +16,24 @@ const FeedPage = () => {
         let response = await fetch('/api/feed/')
         let data = await response.json()
         setFeed(data)
-        console.log(feed)
+        console.log(feed[0])
     }
+
+    // get accounts list
+    let [Accounts, setAccounts] = useState([])
+
+  useEffect(() => {
+      getAccounts()
+
+  }, [])
+
+  let getAccounts = async () => {
+      let response = await fetch('/api/accounts/')
+      let data = await response.json()
+      setAccounts(data)
+      // console.log(data)
+  }
+    
 
   return (
     <div className="sidebar-margin">
@@ -38,7 +54,7 @@ const FeedPage = () => {
   <tbody>
     {feed.map((trxn, index) => (
       
-      <TrxnFeed key={index} trxn={trxn} index={index} />
+      <TrxnFeed key={index} trxn={trxn} index={index} accounts={Accounts} />
       
 
             ))}

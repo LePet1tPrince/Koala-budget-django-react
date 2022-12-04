@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 
 
-const TrxnPage = ({ match }) => {
+const TrxnPage = ({ match, history }) => {
 
     let trxnId = match.params.id
     let [trxn, setTrxn] = useState(null)
@@ -17,6 +16,23 @@ const TrxnPage = ({ match }) => {
         let data = await response.json()
         setTrxn(data)
     }
+
+    let updateTrxn = async () => {
+      fetch(`api/feed/${trxnId}/update`, {
+        method: "PUT",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        notes:JSON.stringify(...trxn)
+    })
+  }
+    let handleSubmit = () => {
+      updateTrxn()
+      // history.push('/')
+    }
+
+    
+
   return (
     <div className="sidebar-margin">
       <div className="border border-primary w-75 h-75vh m-5">
@@ -27,11 +43,14 @@ const TrxnPage = ({ match }) => {
         </div>
         <div className="p-2 bd-highlight">
           <h2>Account</h2>
+          {/* <p>{Accounts[trxn?.account-1].name}</p> */}
+
           <p>{trxn?.account}</p>
         </div>
         <div className="p-2 bd-highlight">
           <h2>Amount</h2>
-          <p>{trxn?.amount}</p>
+          {/* <textarea defaultValue={trxn?.amount}></textarea> */}
+          <p>$ {trxn?.amount}</p>
         </div>
         <div className="p-2 bd-highlight">
           <h2>Category</h2>
@@ -39,9 +58,10 @@ const TrxnPage = ({ match }) => {
         </div>
         <div className="p-2 bd-highlight">
           <h2>notes</h2>
-          <p>{trxn?.notes}</p>
+          <textarea onChange={(e) => { setTrxn({ ...trxn, 'notes': e.target.value }) }}defaultValue={trxn?.notes}></textarea>
+
         </div>
-        <button className="position-relative bottom-0 end-0">Edit Transaction</button>
+        <button  onClick={handleSubmit} className="position-relative bottom-0 end-0">Save</button>
       </div>
     
 
