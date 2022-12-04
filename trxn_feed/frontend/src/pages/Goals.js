@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GoalFeed from '../components/GoalFeed';
+import GoalTable from '../components/Tables/GoalTable';
 
 
 const Goals = () => {
@@ -17,29 +17,15 @@ const Goals = () => {
         setGoals(data)
         console.log(data)
     }
+
+    const Headers = ['Name','Goal','Due Date','Current Raised'];
+
   return (
     <div className="sidebar-margin">
         <div className='feed-list'>
             <div className="p-5 m-5">
-            <table className="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">Goal</th>
-      <th scope="col">Due Date</th>
-      <th scope="col">Current Raised</th>
-    </tr>
-  </thead>
-  <tbody>
-    {goals.map((goal, index) => (
-      
-      <GoalFeed key={index} goal={goal} index={index} />
-      
+            <GoalTable header={Headers} data={goals} />
 
-            ))}
-    
-  </tbody>
-</table>
         
 </div>
         </div>

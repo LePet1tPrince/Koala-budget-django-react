@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import TrxnItem from '../components/TrxnItem';
-import TrxnFeed from '../components/TrxnFeed';
-
+import FeedTable from '../components/Tables/FeedTable';
 
 const FeedPage = () => {
 
@@ -34,35 +33,15 @@ const FeedPage = () => {
       // console.log(data)
   }
     
-
+  const Headers = ['Date','Amount','Category','Account','Notes'];
+  
   return (
     <div className="sidebar-margin">
         <div className='feed-list'>
             <div className="p-5 m-5">
-            <table className="table table-striped">
-  <thead>
-    <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Amount</th>
-      <th scope="col">Account</th>
-      <th scope="col">Category</th>
-      <th scope="col">Notes</th>
-      <th scope="col">See More</th>
-
-    </tr>
-  </thead>
-  <tbody>
-    {feed.map((trxn, index) => (
-      
-      <TrxnFeed key={index} trxn={trxn} index={index} accounts={Accounts} />
-      
-
-            ))}
-    
-  </tbody>
-</table>
+              <FeedTable header={Headers} data={feed} lookup={Accounts} />
         
-</div>
+            </div>
         </div>
     </div>
   )
