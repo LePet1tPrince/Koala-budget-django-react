@@ -23,7 +23,8 @@ const TrxnPage = ({ match, history }) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        notes:JSON.stringify(...trxn)
+        // notes:JSON.stringify({...trxn})
+        
     })
   }
     let handleSubmit = () => {

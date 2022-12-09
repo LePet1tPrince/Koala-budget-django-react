@@ -78,7 +78,7 @@ def getGoals(request):
     serializer = GoalSerializer(goals, many=True)
     return Response(serializer.data)
 
-
+#update transaction
 @api_view(['PUT'])
 def updateTrxn(request, pk):
     data = request.data
@@ -87,4 +87,19 @@ def updateTrxn(request, pk):
     if serlializer.is_valid():
         serlializer.save()
     
+    return Response(serlializer.data)
+
+
+#update transaction
+@api_view(['POST'])
+def CreateTrxn(request):
+    data = request.data
+    trxn = Trxn.objects.create(
+        date = data['date'],
+        account = data['account'],
+        amount = data['amount'],
+        category = data['category'],
+        notes = data['notes'],
+    )
+    serlializer = TrxnSerializer(trxn, data=data)
     return Response(serlializer.data)

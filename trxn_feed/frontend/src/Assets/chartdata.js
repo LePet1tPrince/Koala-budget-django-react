@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import Chart from "react-apexcharts";
+// import React, { Component } from "react";
+// import Chart from "react-apexcharts";
 
-async function getFeed(url=''){
+// async function getFeed(url=''){
 
-    const response = await fetch(url)
-    let data = response.json()
-    return data.map(function(item) {
-        return item.category;
-});
-}
-getFeed('/api/feed/')
-.then((data) => {
-    console.log(data);
-})
+//     const response = await fetch(url)
+//     let data = response.json()
+//     return data.map(function(item) {
+//         return item.category;
+// });
+// }
+// getFeed('/api/feed/')
+// .then((data) => {
+//     console.log(data);
+// })
 // var arr = data.map(function(item) {
 //     return item.category;
 // });

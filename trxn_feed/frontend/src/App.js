@@ -11,6 +11,7 @@ import TrxnPage from './pages/TrxnPage';
 import SideBar from './components/SideBar';
 import Goals from './pages/Goals'
 import Dashboard from "./pages/Dashboard";
+import TrxnAdd from "./pages/TrxnAdd";
 
 
 
@@ -21,11 +22,13 @@ function App() {
       <SideBar />
       <Header />
       <Route path="/" exact component={FeedPage} />
+      <Route path="/newtrxn" component={TrxnAdd} />
       <Route path="/trxn/:id" component={TrxnPage}  />
       <Route path="/accounts/:id" component={AccountPage} />
       <Route path="/accounts" component={AccountPage} />
       <Route path="/goals" component={Goals} />
-      <Route path="/dashboard" component={Dashboard} />
+      {/* <Route path="/dashboard" component={Dashboard} /> */}
+
 
 
       

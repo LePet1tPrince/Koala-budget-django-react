@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 
 const FeedTable = ({ header, data, lookup }) => {
+    // console.log("lookup = ", lookup)
   return (
     <div>
         <table className="table table-striped">

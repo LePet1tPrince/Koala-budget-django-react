@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import Chart from "react-apexcharts";
-import chartdata from '../Assets/chartdata'
+// import React, { Component } from "react";
+// import Chart from "react-apexcharts";
+// import chartdata from '../Assets/chartdata'
 
-class Dashboard extends Component {
+// class Dashboard extends Component {
 //   constructor(props) {
 //     super(props);
 
@@ -24,22 +24,22 @@ class Dashboard extends Component {
 //     };
 //   }
 
-  render() {
-    return (
-      <div className="sidebar-margin">
-        <div className="row">
-          <div className="mixed-chart">
-            <Chart
-              options={chartdata.options}
-              series={chartdata.series}
-              type="bar"
-              width="500"
-            />
-          </div>
-        </div>
-      </div>
-    );
-  }
-}
+//   render() {
+//     return (
+//       <div className="sidebar-margin">
+//         <div className="row">
+//           <div className="mixed-chart">
+//             <Chart
+//               options={chartdata.options}
+//               series={chartdata.series}
+//               type="bar"
+//               width="500"
+//             />
+//           </div>
+//         </div>
+//       </div>
+//     );
+//   }
+// }
 
-export default Dashboard;
+// export default Dashboard;

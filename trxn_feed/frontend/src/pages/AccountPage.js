@@ -40,30 +40,7 @@ const AccountPage = () => {
           <div className="p-5 m-5">
             <h2>Spend Accounts</h2>
             <AccTable header={Headers} data={flowAccounts}/>
-            {/* <table className="table table-striped">
-                  <thead>
-                    <tr>
-                      <th scope="col">Account Number</th>
-                      <th scope="col">Account Name</th>
-                      <th scope="col">Account Type</th>
-                      <th scope="col">Account Sub-Type</th>
-
-
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {spendAccounts.map((acc, index) => (
-                                <tr key={index}>
-                                    <th scope="row">{acc.num}</th>
-                                    <th>{acc.name}</th>
-                                    <th>{acc.type}</th>                           
-                                    <th>{acc.subType}</th>
-                                </tr>
-
-                            ))}
-                    
-                  </tbody>
-                </table> */}
+        
           </div>
         </div>
     </div>
