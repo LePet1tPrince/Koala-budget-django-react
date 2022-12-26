@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
 
 
 function TrxnAdd() {
-  const [date, setDate] = useState("");
+  let [date, setDate] = useState("");
   let [Accounts, setAccounts] = useState([])
-  let [account, setAccount] = useState(0)
+  let [account, setAccount] = useState(1)
   let [amount, setAmount] = useState(0)
-  let [category, setCategory] = useState(0)
+  let [category, setCategory] = useState(1)
   let [notes, setNotes] = useState("")
 
     useEffect(() => {
@@ -21,10 +23,14 @@ function TrxnAdd() {
         console.log(Accounts)
     }
 
-    function handleSubmit(e) {
-      e.preventDefault();
-      console.log('Submitted')
+    // function handleChange(e) {
+    //   setPost({ [e.target.name]: e.target.value});
+    //   console.log(post)
+    // }
 
+    let handleSubmit = async (e) => {
+      e.preventDefault();
+      console.log(e);
     }
 
 
@@ -38,14 +44,14 @@ function TrxnAdd() {
           <label>
             Date
           </label>
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)}></input>
+            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} name='date'></input>
         </div>
 
         <div className="p-2 bd-highlight">
           <label>
             Account
           </label>
-          <select onChange={(e) => setAccount(e.target.value)}>
+          <select onChange={(e) => setAccount(Number(e.target.value))}>
           {Accounts.map((acc, index) => (
             <option value={index + 1}>{acc.name} - {acc.type} - {acc.subType}</option>
                             ))}
@@ -63,7 +69,7 @@ function TrxnAdd() {
           <label>
             Category
           </label>
-          <select onChange={(e) => setCategory(e.target.value)}>
+          <select onChange={(e) => setCategory(Number(e.target.value))}>
           {Accounts.map((acc, index) => (
             <option value={index + 1}>{acc.name} - {acc.type} - {acc.subType}</option>
                             ))}

@@ -1,0 +1,42 @@
+@import './Navbar.css';
+@import './table.css';
+@import './fonts.css';
+
+
+:root {
+  --primary: #2E83B7;
+  --secondary: #E77338;
+  --success: #289A82;
+  --danger: #D25425;
+  --info: #50A6D3;
+  --light: #aac2bd;
+
+}
+
+  .h-75vh {
+    min-height: 75vh;
+  }
+  
+  body {
+    background-color: var(--light);
+    /* background: linear-gradient(90deg, rgba(46,131,183,.5) 27%, rgba(80,166,211,.5) 50%, rgba(40,154,130,.5) 75%); */
+  }
+  
+  /* On screens that are less than 700px wide, make the sidebar into a topbar
+  @media screen and (max-width: 700px) {
+    .sidebar {
+      width: 100%;
+      height: auto;
+      position: relative;
+    }
+    .sidebar a {float: left;}
+    div.content {margin-left: 0;}
+  }
+  
+  On screens that are less than 400px, display the bar vertically, instead of horizontally
+  @media screen and (max-width: 400px) {
+    .sidebar a {
+      text-align: center;
+      float: none;
+    }
+  } */

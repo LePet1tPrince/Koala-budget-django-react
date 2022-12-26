@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 
 
 const FeedTable = ({ header, data, lookup }) => {
-    // console.log("lookup = ", lookup)
   return (
-    <div>
+    <div className="table-responsive">
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -22,8 +21,6 @@ const FeedTable = ({ header, data, lookup }) => {
                         <th scope="row">{item.date}</th>
                         <th>{item.amount}</th>
                         <th>{lookup[item.account-1].name}</th>
-                        {/* <th>{item.account}</th> */}
-                        {/* <th>{item.category}</th> */}
                         <th>{lookup[item.category-1].name}</th>
                         <th>{item.notes}</th>
                     <Link to={`/trxn/${item.id}`}>

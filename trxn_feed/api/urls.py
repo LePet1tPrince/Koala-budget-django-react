@@ -4,6 +4,7 @@ from . import views
 urlpatterns = [
     path('',views.getRoutes, name="routes"),
     path('feed/', views.getFeed, name="feed"),
+    path('feed/create', views.CreateTrxn, name="post-trxn"),
     path('feed/<str:pk>/update', views.updateTrxn, name="update-trxn"),
     path('feed/<str:pk>', views.getTrxn, name="trxn"),
 

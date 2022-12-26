@@ -1,24 +1,29 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 
 const SideBar = () => {
 
     function w3_open() {
-        document.getElementById("mySidebar").style.display = "block";
+        // document.getElementById("mySidebar").style.display = "block";
+        document.getElementById("mySidebar").classList.toggle("show");
       }
       
       function w3_close() {
-        document.getElementById("mySidebar").style.display = "none";
+        document.getElementById("mySidebar").classList.add("show");
       }
   return (
   <div>
-        <div id="mySidebar" className="sidebar">
-  <button className="btn btn-primary m-3" onClick={w3_close}> &#60; </button>
-  <a className="active" href="/">Transaction Feed</a>
-  <a href="/accounts">Accounts</a>
-  <a href="/goals">Goals</a>
-  <a href="/dashboard">Dashboard</a>
-</div>
-<button className="btn btn-primary m-3" onClick={w3_open}> 	&#62; </button>
+      <div id="mySidebar" className="sidebar">
+        <button className="btn btn-primary m-3" onClick={w3_open}> &#60; </button>
+        <Link className="active" to="/">Transaction Feed</Link>
+        <Link to="/accounts">Accounts</Link>
+        <Link to="/goals">Goals</Link>
+        <Link to="/dashboard">Dashboard</Link>
+
+
+ 
+      </div>
+  <button className="btn btn-primary m-3" onClick={w3_open}> 	&#62; </button>
 </div>
 
 

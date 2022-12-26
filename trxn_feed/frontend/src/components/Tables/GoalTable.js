@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const GoalTable = ({ header, data, lookup }) => {
   return (
-    <div>
+    <div className="table-responsive">
         <table className="table table-striped">
             <thead>
                 <tr>

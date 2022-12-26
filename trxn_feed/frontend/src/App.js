@@ -2,7 +2,7 @@ import {
   BrowserRouter as Router,
   Route,
 } from "react-router-dom";
-import './App.css';
+import './css/App.css'
 import Header from './components/Header';
 import FeedPage from './pages/FeedPage';
 import 'bootstrap';
@@ -27,7 +27,7 @@ function App() {
       <Route path="/accounts/:id" component={AccountPage} />
       <Route path="/accounts" component={AccountPage} />
       <Route path="/goals" component={Goals} />
-      {/* <Route path="/dashboard" component={Dashboard} /> */}
+      <Route path="/dashboard" component={Dashboard} />
 
 
 

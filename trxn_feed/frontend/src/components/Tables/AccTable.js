@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 
 const AccTable = ({ header, data, lookup }) => {
   return (
-    <div>
+    <div class="table-responsive">
         <table className="table table-striped">
             <thead>
                 <tr>

@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import TrxnItem from '../components/TrxnItem';
+// import TrxnItem from '../components/TrxnItem';
 import FeedTable from '../components/Tables/FeedTable';
 import Plus from '../Assets/Images/plus.svg';
 import { Link } from 'react-router-dom';
+// import api from '../Assets/apiFeed';
+import FeedData from '../components/Tables/FeedData';
+import AccData from '../components/Tables/AccData';
 
 const FeedPage = () => {
 
     let [feed, setFeed] = useState([])
     let [Accounts, setAccounts] = useState([])
+
+
 
     useEffect(() => {
         getFeed();
@@ -19,7 +24,6 @@ const FeedPage = () => {
         let response = await fetch('/api/feed/')
         let feedData = await response.json()
         setFeed(feedData)
-        // console.log(Array.isArray(feed))
     }
 
     // get accounts list
@@ -27,7 +31,7 @@ const FeedPage = () => {
         let response = await fetch('/api/accounts/')
         let accdata = await response.json()
         setAccounts(accdata)
-        console.log("accounts =", Accounts)
+        console.log("accounts =", AccData)
     }
     
   const Headers = ['Date','Amount','Category','Account','Notes'];
@@ -42,10 +46,10 @@ const FeedPage = () => {
                     <img src= { Plus } className="img-fluid" width="70" height="50" alt="..."/>
                 </Link>
                 </div>
-              <FeedTable header={Headers} data={feed} lookup={Accounts} />
-        
+              {/* <FeedTable header={Headers} data={feed} lookup={Accounts} /> */}
             </div>
         </div>
+        <FeedData />
     </div>
   )
 }
