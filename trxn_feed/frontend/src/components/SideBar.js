@@ -15,7 +15,8 @@ const SideBar = () => {
   <div>
       <div id="mySidebar" className="sidebar">
         <button className="btn btn-primary m-3" onClick={w3_open}> &#60; </button>
-        <Link className="active" to="/">Transaction Feed</Link>
+        <Link to="/">Home</Link>
+        <Link to="/transactions">Transactions</Link>
         <Link to="/accounts">Accounts</Link>
         <Link to="/goals">Goals</Link>
         <Link to="/dashboard">Dashboard</Link>

@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // import { Link } from 'react-router-dom';
 
 
 const AccTable = ({ header, data, lookup }) => {
+
   return (
     <div class="table-responsive">
         <table className="table table-striped">
@@ -27,6 +28,7 @@ const AccTable = ({ header, data, lookup }) => {
                 
             </tbody>
             </table>
+            {/* <div>{accountList}</div> */}
     </div>
   )
 }

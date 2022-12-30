@@ -1,23 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { useAccounts } from '../context/AppContext';
 
 
 
 function AccData() {
-    let [accounts, setAccounts] = useState([])
+    const accounts = useAccounts()
 
 
-
-    useEffect(() => {
-        getAccounts();
-
-    }, [])
-
-    let getAccounts = async () => {
-        let response = await fetch('/api/accounts/')
-        let accountsData = await response.json()
-        setAccounts(accountsData)
-    }
 
 
     function getCol(matrix, col){

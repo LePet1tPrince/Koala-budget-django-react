@@ -1,32 +1,34 @@
-import React, { useState, useEffect } from 'react'
-import AccTable from '../components/Tables/AccTable'
+import React, { useState, useEffect } from 'react';
+import AccTable from '../tables/AccTable';
+import { useAccounts } from '../context/AppContext';
+
 
 
 const AccountPage = () => {
+    const accounts = useAccounts()
+    
 
-    let [Accounts, setAccounts] = useState([])
-
-    useEffect(() => {
-        getAccounts()
-
-    }, [])
-
-    let getAccounts = async () => {
-        let response = await fetch('/api/accounts/')
-        let data = await response.json()
-        setAccounts(data)
-        console.log(Accounts)
-    }
-
-    var ownAccounts = Accounts.filter(function (account) {
+    var ownAccounts = accounts.filter(function (account) {
       return account.type === "Own"
     })
 
-    var flowAccounts = Accounts.filter(function (account) {
+    var flowAccounts = accounts.filter(function (account) {
       return account.type === "Flow"
     })
 
     const Headers = ['Account Number','Account Name','Account Type','Account Sub-Type']
+
+    const accountList = accounts.map(x => x['name'])
+
+    const accountContextValue = {
+      handleAccountAdd,
+      accountList
+
+    }
+
+    function handleAccountAdd(id) {
+      console.log("handling account add")
+    }
 
   return (
     <div>

@@ -19,13 +19,13 @@
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: #04AA6D;
+  background-color: var(--secondary);
   color: white;
 }
 
 /* Links on mouse-over */
 .sidebar a:hover:not(.active) {
-  background-color: #555;
+  background-color: var(--success);
   color: white;
 }
 

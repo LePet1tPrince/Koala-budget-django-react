@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import GoalTable from '../components/Tables/GoalTable';
+import GoalTable from '../tables/GoalTable';
 
 
 const Goals = () => {

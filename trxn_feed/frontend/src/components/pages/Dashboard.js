@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Chart from "react-apexcharts";
-import BarChartData from "../Assets/DashboardData/BarChartData";   
+import BarChartData from "../../assets/DashboardData/BarChartData";   
 
 class Dashboard extends Component {
   constructor(props) {
