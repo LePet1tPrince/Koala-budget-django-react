@@ -19,7 +19,7 @@
 
 /* Active/current link */
 .sidebar a.active {
-  background-color: var(--secondary);
+  background-color: var(--primary);
   color: white;
 }
 

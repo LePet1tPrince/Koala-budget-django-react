@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import AccTable from '../tables/AccTable';
-import { useAccounts } from '../context/AppContext';
+import { useAccountsContext } from '../context/AppContext';
 
 
 
 const AccountPage = () => {
-    const accounts = useAccounts()
+    const { accounts } = useAccountsContext()
     
 
     var ownAccounts = accounts.filter(function (account) {

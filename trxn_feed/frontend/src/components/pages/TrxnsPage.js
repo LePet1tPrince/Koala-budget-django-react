@@ -3,12 +3,12 @@ import TrxnsTable from '../tables/TrxnsTable';
 import Plus from '../../assets/Images/plus.svg';
 import { Link } from 'react-router-dom';
 import FeedData from '../tables/FeedData';
-import { useTrxns, useAccounts } from '../context/AppContext';
+import { useTrxnsContext, useAccountsContext } from '../context/AppContext';
 
 
 const TrxnsPage = () => {
-    const trxns = useTrxns()
-    const accounts = useAccounts()
+    const { trxns, handleTrxnSelect } = useTrxnsContext()
+    const { accounts } = useAccountsContext()
 
   const Headers = ['Date','Amount','Category','Account','Notes'];
   

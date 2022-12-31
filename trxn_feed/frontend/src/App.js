@@ -10,14 +10,13 @@ import TrxnsPage from './components/pages/TrxnsPage';
 import AccountPage from './components/pages/AccountPage';
 import TrxnPage from './components/detailView/TrxnPage';
 import SideBar from './components/SideBar';
-import Goals from './components/pages/Goals'
+import GoalsPage from './components/pages/GoalsPage'
 import Dashboard from "./components/pages/Dashboard";
-import TrxnAdd from "./components/addComponents/TrxnAdd";
+import TrxnEdit from "./components/editComponents/TrxnEdit";
 import HomePage from "./components/pages/HomePage";
 import { v4 as uuidv4 } from 'uuid' ;
 import FeedData from "./components/tables/FeedData";
 import { AppContext } from "./components/context/AppContext";
-
 
 
 function App() {
@@ -44,11 +43,11 @@ function App() {
           <Header />
           <Route path="/" exact component={HomePage} />
           <Route path="/transactions" exact component={TrxnsPage} />
-          <Route path="/transactions/new" component={TrxnAdd} />
-          <Route path="/transactions/:id" component={TrxnPage}  />
+          {/* <Route path="/transactions/new" component={TrxnEdit} /> */}
+          <Route path="/transactions/:id" component={TrxnEdit}  />
           <Route path="/accounts/:id" component={AccountPage} />
           <Route path="/accounts" component={AccountPage} />
-          <Route path="/goals" component={Goals} />
+          <Route path="/goals" component={GoalsPage} />
           <Route path="/dashboard" component={Dashboard} />
           <Route path="/test" component={FeedData} />
         </div>

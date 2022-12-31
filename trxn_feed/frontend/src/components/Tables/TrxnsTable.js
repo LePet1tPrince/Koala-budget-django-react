@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { AccountContext } from '../pages/AccountPage';
+import { useTrxnsContext } from '../context/AppContext';
 
 
 const TrxnsTable = (props) => {
@@ -9,6 +10,8 @@ const TrxnsTable = (props) => {
         data,
         lookup
      } = props;
+
+     const { handleTrxnSelect } = useTrxnsContext()
 
      
 
@@ -23,7 +26,7 @@ const TrxnsTable = (props) => {
 
                 </tr>
             </thead>
-            <tbody>
+            <tbody> 
                 {data.map((item, index) => (
                 
                 <tr key={index}>
@@ -33,7 +36,7 @@ const TrxnsTable = (props) => {
                         <th>{item.category}</th>
                         <th>{item.notes}</th>
                     <Link to={`/transactions/${item.id}`}>
-                        <button>Edit Transaction</button>
+                        <button >Edit Transaction</button>
                     </Link>
                 </tr>
 

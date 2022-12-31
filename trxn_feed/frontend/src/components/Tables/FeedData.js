@@ -1,13 +1,13 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import FeedTable from './TrxnsTable';
-import { useTrxns, useAccounts } from '../context/AppContext';
+import { useTrxnsContext, useAccountsContext } from '../context/AppContext';
 
 
 function FeedData() {
-  const trxns = useTrxns()
-  const accounts = useAccounts()
-  console.log({trxns})
+  const { trxns } = useTrxnsContext()
+  const { accounts } = useAccountsContext()
+  // console.log({trxns})
 
     // let [feed, setFeed] = useState([])
 

@@ -1,43 +1,45 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import { useTrxnsContext } from '../context/AppContext';
 
 
 
-function TrxnAdd() {
+function TrxnEdit() {
 
-  let [date, setDate] = useState("");
-  let [Accounts, setAccounts] = useState([])
-  let [account, setAccount] = useState(1)
-  let [amount, setAmount] = useState(0)
-  let [category, setCategory] = useState(1)
-  let [notes, setNotes] = useState("")
+  const { selectedTrxn } = useTrxnsContext()
 
-    useEffect(() => {
-        getAccounts()
 
-    }, [])
-
-    let getAccounts = async () => {
-        let response = await fetch('/api/accounts/')
-        let data = await response.json()
-        setAccounts(data)
-        console.log(Accounts)
-    }
 
     // function handleChange(e) {
     //   setPost({ [e.target.name]: e.target.value});
     //   console.log(post)
     // }
 
-    let handleSubmit = async (e) => {
-      e.preventDefault();
-      console.log(e);
-    }
+    // let handleSubmit = async (e) => {
+    //   e.preventDefault();
+    //   console.log(e);
+
 
 
 
   return (
     <div className="sidebar-margin">
+      <div className="border border-primary w-75 h-75vh m-5">
+        <form >
+            <label>Date</label>
+            <input type="date" name='date'></input>
+            <h1>{JSON.stringify(selectedTrxn)}</h1>
+
+        </form>
+      </div>
+    </div>
+  )
+
+}
+
+export default TrxnEdit
+
+
+{/* <div className="sidebar-margin">
       <div className="border border-primary w-75 h-75vh m-5">
       <div className="d-flex flex-row bd-highlight mb-3 flex-wrap">
       <form onSubmit={handleSubmit}>
@@ -94,8 +96,4 @@ function TrxnAdd() {
 
       </div>
 
-      </div>
-  )
-}
-
-export default TrxnAdd
+      </div> */}

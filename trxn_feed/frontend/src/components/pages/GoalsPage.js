@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import GoalTable from '../tables/GoalTable';
 
 
-const Goals = () => {
+const GoalsPage = () => {
 
     let [goals, setGoals] = useState([])
 
@@ -33,4 +33,4 @@ const Goals = () => {
   )
 }
 
-export default Goals
+export default GoalsPage
