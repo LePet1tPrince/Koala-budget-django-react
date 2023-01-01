@@ -3,6 +3,7 @@ from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import Trxn, Account, Goal, Budget
 from .serializers import TrxnSerializer, AccountSerializer, GoalSerializer, BudgetSerializer
+from .dashboard import calculate
 # from api import serializers
 
 
@@ -103,3 +104,8 @@ def CreateTrxn(request):
     )
     serlializer = TrxnSerializer(trxn, data=data)
     return Response(serlializer.data)
+
+
+@api_view(['GET'])
+def getDashboard(request):
+    return Response(calculate())

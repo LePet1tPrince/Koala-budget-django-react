@@ -3,9 +3,17 @@ import { useTrxnsContext } from '../context/AppContext';
 
 
 
-function TrxnEdit() {
+function TrxnEdit({ match }) {
 
-  const { selectedTrxn } = useTrxnsContext()
+  const { trxns, selectedTrxn, selectedTrxnId, handleTrxnSelect } = useTrxnsContext()
+
+  useEffect(() => {
+    handleTrxnSelect(parseInt(match.params.id))
+
+  },[])
+
+  // const selectedTrxn = trxns.find(trxn => trxn.id === selectedTrxnId)
+
 
 
 
@@ -23,14 +31,50 @@ function TrxnEdit() {
 
   return (
     <div className="sidebar-margin">
+    {selectedTrxn &&
+      
       <div className="border border-primary w-75 h-75vh m-5">
-        <form >
-            <label>Date</label>
-            <input type="date" name='date'></input>
-            <h1>{JSON.stringify(selectedTrxn)}</h1>
+        <form>
+            <label className="trxn-edit-form__label">Date</label>
+            <input className="trxn-edit-form__input"
+            type="date"
+            name="date"
+            defaultValue={selectedTrxn.date}
+            ></input>
+
+            <label className="trxn-edit-form__label">Category</label>
+            <input className="trxn-edit-form__input" 
+            type="text" 
+            name='category' 
+            defaultValue={selectedTrxn.category}>
+            </input>
+
+            <label className="trxn-edit-form__label">Account</label>
+            <input className="trxn-edit-form__input" 
+            type="text" 
+            name='account' 
+            defaultValue={selectedTrxn.account}>
+            </input>
+
+            <label className="trxn-edit-form__label">Amount</label>
+            <input className="trxn-edit-form__input" 
+            type="currency" 
+            name='amount' 
+            defaultValue={selectedTrxn.amount}>
+            </input>
+
+            <label className="trxn-edit-form__label">Notes</label>
+            <textarea className="trxn-edit-form__input" 
+            name='notes' 
+            defaultValue={selectedTrxn.notes}>
+            </textarea>
+            
+            <input type="submit"
+            className="trxn-edit-form__submit-btn" value="Submit"></input>
 
         </form>
       </div>
+          }
     </div>
   )
 

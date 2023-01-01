@@ -1,4 +1,3 @@
-
 const BarChartData = {
       options: {
         chart: {

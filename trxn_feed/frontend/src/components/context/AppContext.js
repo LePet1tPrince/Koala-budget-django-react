@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 const TrxnsContext = React.createContext()
 const AccountsContext = React.createContext()
 const GoalsContext = React.createContext()
+const DashboardContext = React.createContext()
 
 
 export function useTrxnsContext() {
@@ -15,6 +16,10 @@ export function useAccountsContext() {
 
 export function useGoalsContext() {
     return useContext(GoalsContext)
+}
+
+export function useDashboardContext() {
+    return useContext(DashboardContext)
 }
 
 
@@ -42,7 +47,7 @@ export function AppContext({ children }) {
 
     function handleTrxnSelect(id) {
         setSelectedTrxnId(id)
-        console.log("selected id is", selectedTrxnId)
+        console.log("selected id is", typeof(selectedTrxnId))
     }
 
     // values to get passed into context
@@ -50,6 +55,7 @@ export function AppContext({ children }) {
         trxns,
         handleTrxnSelect,
         selectedTrxn,
+        selectedTrxnId,
         setTrxns
         
     }
@@ -104,7 +110,30 @@ export function AppContext({ children }) {
     goals,
     setGoals
 }
+
+    // Dashboard //
+    //state
+    const [barData, setBarData] = useState([])
+
+    let getDashboard = async () => {
+        let response = await fetch('/api/dashboard')
+        let data = await response.json()
+        setBarData(data);
+    }
+
+    //Use Effect
     
+    useEffect(() => {
+        getDashboard()
+    },[])
+
+    // set values
+
+    const DashboardContextValue = {
+        barData,
+        setBarData,
+    }
+
 
 
     
@@ -112,7 +141,9 @@ export function AppContext({ children }) {
       <TrxnsContext.Provider value={TrxnsContextValue}>
         <AccountsContext.Provider value={AccountsContextValue}>
             <GoalsContext.Provider value={GoalsContextValue}>
-                {children}
+                <DashboardContext.Provider value={DashboardContextValue}>
+                    {children}
+                </DashboardContext.Provider>
             </GoalsContext.Provider>
         </AccountsContext.Provider>
       </TrxnsContext.Provider>

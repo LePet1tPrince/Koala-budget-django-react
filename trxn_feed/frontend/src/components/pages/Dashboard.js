@@ -1,29 +1,60 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import Chart from "react-apexcharts";
-import BarChartData from "../../assets/DashboardData/BarChartData";   
+// import BarChartData from "../../assets/DashboardData/BarChartData";   
+import { useDashboardContext } from "../../components/context/AppContext";
 
-class Dashboard extends Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      options: {
-        chart: {
-          id: "basic-bar"
-        },
-        xaxis: [
-          {...BarChartData.options.xaxis}
-        ]
+const BarChartData = {
+  options: {
+    chart: {
+      id: "basic-bar"
+    },
+    xaxis: {
+        // categories: data.category
+      categories: [1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999]
+    }
+  },
+  series: [
+    {
+      name: "amount",
+      data: [30, 40, 45, 50, 49, 60, 70, 91]
+    },
+    {
+      name: "budget",
+      data: [33, 43, 43, 53, 43, 63, 73, 93]
+    }
+  ]
+};
+
+export default function Dashboard() {
+
+  const { barData } = useDashboardContext();
+
+  const BarChartData = {
+    options: {
+      chart: {
+        id: "basic-bar"
       },
-      series: [
-          {...BarChartData.options.series}
-      ]
-    };
-  }
+      xaxis: {
+        categories: barData.category
+      }
+    },
+    series: [
+      {
+        name: "amount",
+        data: barData.amount
+      },
+      {
+        name: "budget",
+        data: barData.amount
+      }
+    ]
+  };
 
-  render() {
-    return (
-      <div className="sidebar-margin">
+  
+
+  return (
+    <div className="sidebar-margin">
         <div className="row">
           <div className="mixed-chart">
             <Chart
@@ -35,8 +66,5 @@ class Dashboard extends Component {
           </div>
         </div>
       </div>
-    );
-  }
+  )
 }
-
-export default Dashboard;

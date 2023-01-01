@@ -12,6 +12,8 @@ urlpatterns = [
     path('accounts/<str:pk>', views.getAccount, name="account"),
 
     path('goals/', views.getGoals, name="goals"),
+    path('dashboard/', views.getDashboard, name="dashboard"),
+
 
 
 ]
