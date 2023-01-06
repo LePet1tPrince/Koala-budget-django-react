@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import AccTable from '../tables/AccTable';
 import { useAccountsContext } from '../context/AppContext';
+import Plus from '../../assets/Images/plus.svg';
+
 
 
 
 const AccountPage = () => {
-    const { accounts } = useAccountsContext()
+    const { accounts, handleAccountSelect, selectedAccountId } = useAccountsContext()
     
 
     var ownAccounts = accounts.filter(function (account) {
@@ -18,30 +20,29 @@ const AccountPage = () => {
 
     const Headers = ['Account Number','Account Name','Account Type','Account Sub-Type']
 
-    const accountList = accounts.map(x => x['name'])
 
-    const accountContextValue = {
-      handleAccountAdd,
-      accountList
-
-    }
-
-    function handleAccountAdd(id) {
-      console.log("handling account add")
-    }
 
   return (
     <div>
         <div className='feed-list sidebar-margin'>
-            <div className="p-5 m-5">
-              <h2>Owner Accounts</h2>
-              <AccTable header={Headers} data={ownAccounts}/>
+          <button className="btn btn-info">
+            <img src= { Plus }  className="img-fluid" width="70" height="50" alt="..."/>
+          </button>
+          <div className="p-5 m-5">
+            <h2>Owner Accounts</h2>
+            <AccTable header={Headers}
+            data={ownAccounts}
+            handleAccountSelect={handleAccountSelect}
+            selectedAccountId={selectedAccountId}/>
 
                 
           </div>
           <div className="p-5 m-5">
             <h2>Spend Accounts</h2>
-            <AccTable header={Headers} data={flowAccounts}/>
+            <AccTable header={Headers} 
+            data={flowAccounts}
+            handleAccountSelect={handleAccountSelect}
+            selectedAccountId={selectedAccountId}/>
         
           </div>
         </div>

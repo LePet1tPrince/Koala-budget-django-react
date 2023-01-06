@@ -29,20 +29,18 @@ class Trxn(models.Model):
     date = models.DateField(auto_now_add=False)
     updated = models.DateTimeField(auto_now=True)
     amount = models.DecimalField(max_digits=10,decimal_places=2)
-    account = models.ForeignKey(Account,
+    fromAccount = models.ForeignKey(Account,
         blank=False, #change to false
         null=False,#change to false
         on_delete=models.CASCADE,
-        limit_choices_to=Q(type='Own'),
-        related_name='account',
+        related_name='fromAccount',
         )
 
-    category = models.ForeignKey(Account,
+    toAccount = models.ForeignKey(Account,
         blank=False,#change to false
         null=False,#change to false
         on_delete=models.CASCADE,
-        limit_choices_to=Q(type='Flow'),
-        related_name='category',
+        related_name='toAccount',
 
     )
 
@@ -52,7 +50,7 @@ class Trxn(models.Model):
     )
 
     def __str__(self):
-        return self.date.strftime("%d %b, %Y") + " - " + str(self.amount) + " - " + str(self.category) + " - " + self.notes
+        return self.date.strftime("%d %b, %Y") + " - " + str(self.amount) + " - " + str(self.fromAccount) + " -> " + str(self.toAccount) + " - " + self.notes
 
 
 #Savings goals

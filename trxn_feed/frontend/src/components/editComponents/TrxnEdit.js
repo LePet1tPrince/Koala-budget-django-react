@@ -1,76 +1,131 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { useTrxnsContext } from '../context/AppContext';
-
+import React, { useState, useEffect } from 'react';
+import { useTrxnsContext, useAccountsContext } from '../context/AppContext';
+import {
+  Link
+} from "react-router-dom";
 
 
 function TrxnEdit({ match }) {
+  const [editedTrxn, setEditedTrxn ] = useState();
 
-  const { trxns, selectedTrxn, selectedTrxnId, handleTrxnSelect } = useTrxnsContext()
+  const { trxns, 
+    selectedTrxnId, 
+    handleTrxnSelect, 
+    handleTrxnSubmit,
+    handleTrxnChange,
+    handleTrxnDelete,
+    selectedTrxn
+   } = useTrxnsContext()
 
-  useEffect(() => {
-    handleTrxnSelect(parseInt(match.params.id))
+   const { accounts } = useAccountsContext();
 
-  },[])
+   
+   
+   useEffect(() => {
+     handleTrxnSelect(parseInt(match.params.id))
+    },[])
 
-  // const selectedTrxn = trxns.find(trxn => trxn.id === selectedTrxnId)
+    useEffect(() => {
+     setEditedTrxn(selectedTrxn)
+     console.log("selected id:", selectedTrxn)
+
+    },[selectedTrxn])
+    
+
+  function handleChange(changes) {
+    setEditedTrxn({...editedTrxn, ...changes})
+    console.log({...editedTrxn})
+
+  }
 
 
 
 
-    // function handleChange(e) {
-    //   setPost({ [e.target.name]: e.target.value});
-    //   console.log(post)
-    // }
 
-    // let handleSubmit = async (e) => {
-    //   e.preventDefault();
-    //   console.log(e);
+    function handleSubmit(e, editedTrxn) {
+      e.preventDefault();
+      console.log("edited Trxn:", editedTrxn);
+      handleTrxnSubmit(editedTrxn)
+      alert('successfully submitted')
+    }
 
 
 
 
   return (
     <div className="sidebar-margin">
+    
+
+        
+          
     {selectedTrxn &&
       
-      <div className="border border-primary w-75 h-75vh m-5">
-        <form>
+      <div className="bg--s-info w-75 h-75vh m-5 rounded rounded-5 p-5">
+          <div className="d-flex w-50">
+              <div className="mr-auto p-2">
+                  <Link to="/transactions">
+                <button className="btn btn-info mx-3 mr-auto p-2" >&#60; Back to Feed
+                    </button>
+                  </Link>
+                    </div>
+              <div className="p-2">
+              <button className="btn btn-danger" onClick={() => handleTrxnDelete(selectedTrxnId)}>Delete Transaction</button>
+                </div>
+            </div>
+        <form onSubmit={(e) => handleSubmit(e, editedTrxn)}>
+          <div className="form-group">
             <label className="trxn-edit-form__label">Date</label>
             <input className="trxn-edit-form__input"
             type="date"
             name="date"
             defaultValue={selectedTrxn.date}
+            onChange={e => handleChange({date: e.target.value})}
             ></input>
-
-            <label className="trxn-edit-form__label">Category</label>
-            <input className="trxn-edit-form__input" 
-            type="text" 
-            name='category' 
-            defaultValue={selectedTrxn.category}>
-            </input>
-
-            <label className="trxn-edit-form__label">Account</label>
-            <input className="trxn-edit-form__input" 
-            type="text" 
-            name='account' 
-            defaultValue={selectedTrxn.account}>
-            </input>
-
+          </div>
+          <div className="form-group">
+            <label className="trxn-edit-form__label">From</label>
+            <select className="trxn-edit-form__input" 
+            name='fromAccount' 
+            defaultValue={selectedTrxn.fromAccount}
+            onChange={e => handleChange({fromAccount: e.target.value})}
+            >
+              {accounts.map((account, index) => (
+                <option key={index} value={account.id}>{account.name}  - {account.subType}</option>
+              ))}
+            </select>
+            </div>
+         
+          <div className="form-group">
             <label className="trxn-edit-form__label">Amount</label>
             <input className="trxn-edit-form__input" 
             type="currency" 
             name='amount' 
-            defaultValue={selectedTrxn.amount}>
-            </input>
-
+            defaultValue={selectedTrxn.amount}
+            onChange={e => handleChange({amount: parseFloat(e.target.value)})}
+            ></input>
+            </div>
+            <div className="form-group">
+            <label className="trxn-edit-form__label">To</label>
+            <select className="trxn-edit-form__input" 
+            name='toAccount' 
+            defaultValue={selectedTrxn.toAccount}
+            onChange={e => handleChange({toAccount: e.target.value})}
+            >
+               {accounts.map((account, index) => (
+                <option key={index} value={account.id}>{account.name} - {account.subType}</option>
+              ))}
+            </select>
+          </div>
+          <div className="form-group">
             <label className="trxn-edit-form__label">Notes</label>
             <textarea className="trxn-edit-form__input" 
             name='notes' 
-            defaultValue={selectedTrxn.notes}>
-            </textarea>
-            
+            defaultValue={selectedTrxn.notes}
+            onChange={e => handleChange({notes: e.target.value})}
+            ></textarea>
+            </div>
             <input type="submit"
-            className="trxn-edit-form__submit-btn" value="Submit"></input>
+            className="trxn-edit-form__submit-btn btn btn-success" value="Submit"></input>
 
         </form>
       </div>
@@ -81,63 +136,3 @@ function TrxnEdit({ match }) {
 }
 
 export default TrxnEdit
-
-
-{/* <div className="sidebar-margin">
-      <div className="border border-primary w-75 h-75vh m-5">
-      <div className="d-flex flex-row bd-highlight mb-3 flex-wrap">
-      <form onSubmit={handleSubmit}>
-        <div className="p-2 bd-highlight">
-          <label>
-            Date
-          </label>
-            <input type="date" value={date} onChange={(e) => setDate(e.target.value)} name='date'></input>
-        </div>
-
-        <div className="p-2 bd-highlight">
-          <label>
-            Account
-          </label>
-          <select onChange={(e) => setAccount(Number(e.target.value))}>
-          {Accounts.map((acc, index) => (
-            <option value={index + 1}>{acc.name} - {acc.type} - {acc.subType}</option>
-                            ))}
-          </select>
-        </div>
-
-        <div className="p-2 bd-highlight">
-          <label>
-            Amount
-          </label>
-            <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)}></input>
-        </div>
-
-        <div className="p-2 bd-highlight">
-          <label>
-            Category
-          </label>
-          <select onChange={(e) => setCategory(Number(e.target.value))}>
-          {Accounts.map((acc, index) => (
-            <option value={index + 1}>{acc.name} - {acc.type} - {acc.subType}</option>
-                            ))}
-          </select>
-        </div>
-
-        <div className="p-2 bd-highlight">
-          <label>
-            Notes
-          </label>
-          <textarea value={notes} onChange={(e) => setNotes(e.target.value)}></textarea>
-          
-        </div>
-        <input type="submit" value="Submit" />
-
-      </form>
-
-        
-      </div>
-    
-
-      </div>
-
-      </div> */}

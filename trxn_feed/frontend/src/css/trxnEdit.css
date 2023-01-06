@@ -1,0 +1,22 @@
+.trxn-edit-form__label {
+    font-size: 32px;
+    margin-right: 20px;
+
+}
+
+
+.trxn-edit-form__input {
+    font-size: 22px;
+    border-radius: 10px;
+    padding: 3px 15px;
+
+}
+
+.form-group {
+
+}
+
+.trxn-edit-form__submit-btn {
+    font-size:26px !important;
+    width: 50%;
+}

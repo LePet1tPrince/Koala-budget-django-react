@@ -1,4 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
+import csrftoken from '../../assets/csrftoken'
+import { v4 as uuidv4 } from 'uuid' ;
+
 
 const TrxnsContext = React.createContext()
 const AccountsContext = React.createContext()
@@ -45,18 +48,100 @@ export function AppContext({ children }) {
         setTrxns(trxnsData)
     }
 
+    let updateTrxns = async (trxn) => {
+        fetch(`/api/feed/${trxn.id}/update`, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(trxn)
+        })
+    }
+
     function handleTrxnSelect(id) {
         setSelectedTrxnId(id)
-        console.log("selected id is", typeof(selectedTrxnId))
+    }
+
+    function handleTrxnSubmit(newTrxn) {
+        updateTrxns(newTrxn);
+        console.log('trxn:', newTrxn)
+        getTrxns();
+    }
+
+    function handleTrxnChange(id, trxn) {
+        const newTrxns = [...trxns]
+        const index = newTrxns.findIndex(t => t.id === id)
+        newTrxns[index] = trxn
+        setTrxns(newTrxns)
+        setSelectedTrxnId(id)
+        console.log(trxns)
+
+    }
+
+    function handleNewTrxn() {
+        const maxId = Math.max(...trxns.map(t => t.id));
+        const body = {
+            "id": maxId +1,
+            "date": "2023-01-01",
+            "amount": 0,
+            "notes": "Notes",
+            "toAccount": 1,
+            "fromAccount": 1
+
+        };
+        
+        fetch(`/api/feed/`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(body)
+        }).then((response) => {
+            if (response.ok) {
+                console.log('Transaction created successfully');
+                // getTrxns();
+                window.location = '/transactions/' + maxId+1
+
+            } else {
+                console.log('Error creating transaction')
+            }
+        })
+    }
+
+    function handleTrxnDelete(id) {
+        fetch(`/api/feed/${id}/delete`, {
+            method: 'DELETE',
+            headers: {
+                'Content-Type' : 'application/json',
+                'X-CSRFToken': csrftoken
+            }
+        }).then((response) => {
+            if (response.ok) {
+                console.log('Transaction deleted')
+                window.location = '/transactions'
+            } else {
+                console.log('Error deleteing transaction')
+            }
+        })
+
     }
 
     // values to get passed into context
     const TrxnsContextValue = {
         trxns,
-        handleTrxnSelect,
         selectedTrxn,
         selectedTrxnId,
-        setTrxns
+        setTrxns,
+        handleTrxnSelect,
+        handleTrxnSubmit,
+        handleTrxnChange,
+        handleTrxnDelete,
+        handleNewTrxn
+
         
     }
 
@@ -64,6 +149,7 @@ export function AppContext({ children }) {
 
     //State and variables
     const [accounts, setAccounts] = useState([])
+    const [selectedAccountId, setSelectedAccountId] = useState([])
 
     //Effect
     useEffect(() => {
@@ -78,11 +164,18 @@ export function AppContext({ children }) {
         // console.log("accounts =", accdata)
     }
 
+    function handleAccountSelect(id) {
+        setSelectedAccountId(id)
+        console.log('Selected Account', id)
+    }
+
     // values to get passed into context
 
     const AccountsContextValue = {
         accounts,
-        setAccounts
+        setAccounts,
+        handleAccountSelect,
+        selectedAccountId
     }
 
     //Goals

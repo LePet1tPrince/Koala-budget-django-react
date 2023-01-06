@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { AccountContext } from '../pages/AccountPage';
 import { useTrxnsContext } from '../context/AppContext';
+import pencil from '../../assets/Images/pencil-icon.png';
 
 
 const TrxnsTable = (props) => {
@@ -31,12 +32,15 @@ const TrxnsTable = (props) => {
                 
                 <tr key={index}>
                         <th scope="row">{item.date}</th>
+                        <th>{item.fromAccount}</th>
                         <th>{item.amount}</th>
-                        <th>{item.account}</th>
-                        <th>{item.category}</th>
+                        <th>{item.toAccount}</th>
                         <th>{item.notes}</th>
                     <Link to={`/transactions/${item.id}`}>
-                        <button >Edit Transaction</button>
+                        <button className="btn btn-info">
+                            <img src={ pencil } width="20" height="20" alt="Edit Transaction"/>
+                            
+                        </button>
                     </Link>
                 </tr>
 
@@ -44,7 +48,6 @@ const TrxnsTable = (props) => {
                 
             </tbody>
             </table>
-            {/* <div>{accountList}</div> */}
     </div>
   )
 }

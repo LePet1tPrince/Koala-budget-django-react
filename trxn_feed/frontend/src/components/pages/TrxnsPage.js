@@ -7,10 +7,10 @@ import { useTrxnsContext, useAccountsContext } from '../context/AppContext';
 
 
 const TrxnsPage = () => {
-    const { trxns, handleTrxnSelect } = useTrxnsContext()
+    const { trxns, handleTrxnSelect, handleNewTrxn } = useTrxnsContext()
     const { accounts } = useAccountsContext()
 
-  const Headers = ['Date','Amount','Category','Account','Notes'];
+  const Headers = ['Date','From','Amount','To','Notes'];
   
   return (
     <div className="sidebar-margin">
@@ -18,9 +18,11 @@ const TrxnsPage = () => {
             <div className="p-5 m-5">
                 <div className="d-flex justify-content-between">
                 <h1>Transaction Feed</h1>
-                <Link to="/transactions/new">
-                    <img src= { Plus } className="img-fluid" width="70" height="50" alt="..."/>
-                </Link>
+                {/* <Link to="/transactions/new"> */}
+                <button onClick={() => handleNewTrxn()} className="btn btn-info">
+                    <img src= { Plus }  className="img-fluid" width="70" height="50" alt="..."/>
+                </button>
+                {/* </Link> */}
                 </div>
               <TrxnsTable
                 header={Headers}
@@ -29,7 +31,7 @@ const TrxnsPage = () => {
                 />
             </div>
         </div>
-        <FeedData />
+        {/* <FeedData /> */}
     </div>
   )
 }
