@@ -1,15 +1,24 @@
-import React, { useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import pencil from '../../assets/Images/pencil-icon.png';
 
 
 
 
 const AccTable = (props) => {
-    const { header, data, handleAccountSelect, selectedAccountId } = props;
+    const [editedAccount, setEditedAccount] = useState()
+    const { header, data, handleAccountSelect, selectedAccountId, handleAccountSubmit } = props;
 
-    function handleChange(changes) {
-        console.log('change!!')
+    useEffect(() => {
+        setEditedAccount(data.find(a => a.id === selectedAccountId))
+
+    },[selectedAccountId])
+
+    function handleAccountChange(changes) {
+        setEditedAccount({...editedAccount, ...changes})
+        console.log("Changes")
     }
+
+    
 
 
   return (
@@ -27,7 +36,7 @@ const AccTable = (props) => {
             {data.map((acc, index) => {
                 if (acc.id !== selectedAccountId) {
                     // Non editable rows
-                    return <tr key={index}>
+                    return <tr key={acc.id}>
                     <th scope="row">{acc.num}</th>
                     <th>{acc.name}</th>
                     <th>{acc.type}</th>                           
@@ -38,28 +47,29 @@ const AccTable = (props) => {
                 </tr>
                 } else {
                     // When row gets selected, it becomes editable
-                    return <tr key={index}>
+                    return <tr key={acc.id}>
                     <th scope="row">
                         <input 
                         type="number"
                         name="number"
                         defaultValue={acc.num}
-                        onChange={e => handleChange({num: e.target.value})}></input>
+                        onChange={e => handleAccountChange({num: e.target.value})}></input>
                     </th>
+
                     <th>
                     <input 
                         type="text"
                         name="name"
                         defaultValue={acc.name}
-                        onChange={e => handleChange({name: e.target.value})}></input>
+                        onChange={e => handleAccountChange({name: e.target.value})}></input>
                     </th>
                     <th>
                     <select name="type"
                      defaultValue={acc.type}
-                     onChange={e => handleChange({type: e.target.value})}
+                     onChange={e => handleAccountChange({type: e.target.value})}
                      >
-                            {data.map((account, i) => (
-                                <option key={index} value={account.type}>{account.type}</option>
+                            {data.map((account) => (
+                                <option key={account.id} value={account.type}>{account.type}</option>
                             ))}
                         </select>
                         </th>                           
@@ -67,14 +77,14 @@ const AccTable = (props) => {
                     <select
                     name="subType" 
                     defaultValue={acc.subType}
-                    onChange={e => handleChange({subType: e.target.value})}
+                    onChange={e => handleAccountChange({subType: e.target.value})}
                     >
                             {data.map((account, i) => (
-                                <option key={index} value={account.subType}>{account.subType}</option>
+                                <option key={account.id} value={account.subType}>{account.subType}</option>
                             ))}
                         </select>
                     </th>
-                    <button className="btn btn-success" onClick={() => handleAccountSelect(acc.id)}>
+                    <button className="btn btn-success" onClick={() => handleAccountSubmit(editedAccount)}>
                         Save
                     </button>
 

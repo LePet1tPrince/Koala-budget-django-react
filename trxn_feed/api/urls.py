@@ -12,6 +12,7 @@ urlpatterns = [
 
     path('accounts/', views.getAccounts, name="accounts"),
     path('accounts/<str:pk>', views.getAccount, name="account"),
+    path('accounts/<str:pk>/update', views.updateAccount, name="update-account"),
 
     path('goals/', views.getGoals, name="goals"),
     path('dashboard/', views.getDashboard, name="dashboard"),

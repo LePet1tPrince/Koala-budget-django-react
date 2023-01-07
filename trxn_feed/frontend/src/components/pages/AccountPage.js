@@ -7,16 +7,37 @@ import Plus from '../../assets/Images/plus.svg';
 
 
 const AccountPage = () => {
-    const { accounts, handleAccountSelect, selectedAccountId } = useAccountsContext()
-    
-
-    var ownAccounts = accounts.filter(function (account) {
+    const { accounts, handleAccountSelect, selectedAccountId, handleAccountSubmit } = useAccountsContext()
+    const [ ownAccounts, setOwnAccounts ] = useState(accounts.filter(function (account) {
       return account.type === "Own"
-    })
-
-    var flowAccounts = accounts.filter(function (account) {
+    }))
+    const [flowAccounts, setFlowAccounts ] = useState(accounts.filter(function (account) {
       return account.type === "Flow"
-    })
+    }))
+
+    useEffect(() => {
+      var ownAcc = accounts.filter(function (account) {
+        return account.type === "Own"
+      })
+  
+      var flowAcc = accounts.filter(function (account) {
+        return account.type === "Flow"
+      })
+        setOwnAccounts(ownAcc)
+        setFlowAccounts(flowAcc)
+
+
+    }, [accounts])
+
+   
+
+    // var ownAccounts2 = accounts.filter(function (account) {
+    //   return account.type === "Own"
+    // })
+
+    // var flowAccounts = accounts.filter(function (account) {
+    //   return account.type === "Flow"
+    // })
 
     const Headers = ['Account Number','Account Name','Account Type','Account Sub-Type']
 
@@ -33,7 +54,9 @@ const AccountPage = () => {
             <AccTable header={Headers}
             data={ownAccounts}
             handleAccountSelect={handleAccountSelect}
-            selectedAccountId={selectedAccountId}/>
+            selectedAccountId={selectedAccountId}
+            handleAccountSubmit={handleAccountSubmit}
+            />
 
                 
           </div>
@@ -42,7 +65,9 @@ const AccountPage = () => {
             <AccTable header={Headers} 
             data={flowAccounts}
             handleAccountSelect={handleAccountSelect}
-            selectedAccountId={selectedAccountId}/>
+            selectedAccountId={selectedAccountId}
+            handleAccountSubmit={handleAccountSubmit}
+            />
         
           </div>
         </div>

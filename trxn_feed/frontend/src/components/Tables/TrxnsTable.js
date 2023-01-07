@@ -6,6 +6,7 @@ import pencil from '../../assets/Images/pencil-icon.png';
 
 
 const TrxnsTable = (props) => {
+    
     const { 
         header,
         data,

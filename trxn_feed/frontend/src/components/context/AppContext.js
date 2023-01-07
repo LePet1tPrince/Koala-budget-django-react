@@ -164,17 +164,39 @@ export function AppContext({ children }) {
         // console.log("accounts =", accdata)
     }
 
+    let updateAccount = async (account) => {
+        fetch(`/api/accounts/${account.id}/update`, {
+            method: "PUT",
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrftoken
+            },
+            body: JSON.stringify(account)
+        })
+
+    }
+
     function handleAccountSelect(id) {
         setSelectedAccountId(id)
         console.log('Selected Account', id)
     }
 
+    function handleAccountSubmit(newAccount) {
+            updateAccount(newAccount)
+            console.log('Account:', newAccount)
+            setSelectedAccountId(undefined)
+            getAccounts();
+        
+    }
     // values to get passed into context
 
     const AccountsContextValue = {
         accounts,
         setAccounts,
+        getAccounts,
         handleAccountSelect,
+        handleAccountSubmit,
         selectedAccountId
     }
 

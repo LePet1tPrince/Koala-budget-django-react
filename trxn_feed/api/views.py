@@ -87,6 +87,16 @@ def getAccounts(request):
     serializer = AccountSerializer(feed, many=True)
     return Response(serializer.data)
 
+@api_view(['PUT'])
+def updateAccount(request, pk):
+    data = request.data
+    account = Account.objects.get(id=pk)
+    serliazer = AccountSerializer(instance=account, data=data)
+    if serliazer.is_valid():
+        serliazer.save()
+    return Response(serliazer.data)
+
+
 #single account
 @api_view(['GET'])
 def getAccount(request, pk):
