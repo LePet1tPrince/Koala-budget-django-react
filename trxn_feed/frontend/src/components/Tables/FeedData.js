@@ -1,7 +1,8 @@
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import FeedTable from './TrxnsTable';
-import { useTrxnsContext, useAccountsContext } from '../context/AppContext';
+import { useTrxnsContext } from '../context/TrxnContext';
+import { useAccountsContext } from '../context/AccountContext';
 
 
 function FeedData() {

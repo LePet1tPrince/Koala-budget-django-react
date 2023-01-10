@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import pencil from '../../assets/Images/pencil-icon.png';
+import { useAccountsContext } from '../context/AccountContext';
 
 
 
 
 const AccTable = (props) => {
+    const { handleAccountSelect, selectedAccountId, handleAccountSubmit, handleAccountDelete } = useAccountsContext();
     const [editedAccount, setEditedAccount] = useState()
-    const { header, data, handleAccountSelect, selectedAccountId, handleAccountSubmit } = props;
+    const { header, data } = props;
 
     useEffect(() => {
         setEditedAccount(data.find(a => a.id === selectedAccountId))
@@ -22,7 +24,7 @@ const AccTable = (props) => {
 
 
   return (
-    <div class="table-responsive">
+    <div className="table-responsive">
         <table className="table table-striped">
             <thead>
                 <tr>
@@ -37,33 +39,35 @@ const AccTable = (props) => {
                 if (acc.id !== selectedAccountId) {
                     // Non editable rows
                     return <tr key={acc.id}>
-                    <th scope="row">{acc.num}</th>
-                    <th>{acc.name}</th>
-                    <th>{acc.type}</th>                           
-                    <th>{acc.subType}</th>
+                    <td scope="row">{acc.num}</td>
+                    <td>{acc.name}</td>
+                    <td>{acc.type}</td>                           
+                    <td>{acc.subType}</td>
+                    <td>
                     <button className="btn btn-info" onClick={() => handleAccountSelect(acc.id)}>
                         <img src={ pencil } width="20" height="20" alt="Edit Transaction"/>
                     </button>
+                    </td>
                 </tr>
                 } else {
                     // When row gets selected, it becomes editable
                     return <tr key={acc.id}>
-                    <th scope="row">
+                    <td scope="row">
                         <input 
                         type="number"
                         name="number"
                         defaultValue={acc.num}
                         onChange={e => handleAccountChange({num: e.target.value})}></input>
-                    </th>
+                    </td>
 
-                    <th>
+                    <td>
                     <input 
                         type="text"
                         name="name"
                         defaultValue={acc.name}
                         onChange={e => handleAccountChange({name: e.target.value})}></input>
-                    </th>
-                    <th>
+                    </td>
+                    <td>
                     <select name="type"
                      defaultValue={acc.type}
                      onChange={e => handleAccountChange({type: e.target.value})}
@@ -72,8 +76,8 @@ const AccTable = (props) => {
                                 <option key={account.id} value={account.type}>{account.type}</option>
                             ))}
                         </select>
-                        </th>                           
-                    <th>
+                        </td>                           
+                    <td>
                     <select
                     name="subType" 
                     defaultValue={acc.subType}
@@ -83,15 +87,16 @@ const AccTable = (props) => {
                                 <option key={account.id} value={account.subType}>{account.subType}</option>
                             ))}
                         </select>
-                    </th>
-                    <button className="btn btn-success" onClick={() => handleAccountSubmit(editedAccount)}>
-                        Save
-                    </button>
-
-                    <button className="btn btn-danger" onClick={() => handleAccountSelect(undefined)}>
-                        Cancel
-                    </button>
+                    </td>
+                    <td>
+                        <button className="btn btn-success" onClick={() => handleAccountSubmit(editedAccount)}>
+                            Save
+                        </button>
+                        <button className="btn btn-danger" onClick={() => handleAccountDelete(selectedAccountId)}>
+                            Delete
+                        </button>
                     
+                    </td>
 
                     </tr>
                 }}

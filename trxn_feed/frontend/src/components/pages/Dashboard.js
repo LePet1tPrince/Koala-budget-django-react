@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import Chart from "react-apexcharts";
 // import BarChartData from "../../assets/DashboardData/BarChartData";   
-import { useDashboardContext } from "../../components/context/AppContext";
+// import { useDashboardsContext } from "../context/DashboardContext";
+import { useDashboardContext } from "../context/DashboardContext";
 
 
 const BarChartData = {

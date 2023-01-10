@@ -81,11 +81,20 @@ def getTrxn(request, pk):
     return Response(serializer.data)
 
 #Accounts feed
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def getAccounts(request):
-    feed = Account.objects.all() 
-    serializer = AccountSerializer(feed, many=True)
-    return Response(serializer.data)
+    if request.method == "GET":
+        feed = Account.objects.all() 
+        serializer = AccountSerializer(feed, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        serializer = AccountSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
 
 @api_view(['PUT'])
 def updateAccount(request, pk):
@@ -95,6 +104,12 @@ def updateAccount(request, pk):
     if serliazer.is_valid():
         serliazer.save()
     return Response(serliazer.data)
+
+@api_view(['DELETE'])
+def deleteAccount(request, pk):
+    account = get_object_or_404(Account, pk=pk)
+    account.delete()
+    return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 #single account

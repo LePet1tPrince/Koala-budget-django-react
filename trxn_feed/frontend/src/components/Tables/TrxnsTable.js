@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { AccountContext } from '../pages/AccountPage';
-import { useTrxnsContext } from '../context/AppContext';
+import { useTrxnsContext } from '../context/TrxnContext';
 import pencil from '../../assets/Images/pencil-icon.png';
 
 
@@ -10,10 +10,9 @@ const TrxnsTable = (props) => {
     const { 
         header,
         data,
-        lookup
      } = props;
 
-     const { handleTrxnSelect } = useTrxnsContext()
+    //  const { handleTrxnSelect } = useTrxnsContext()
 
      
 
@@ -32,17 +31,18 @@ const TrxnsTable = (props) => {
                 {data.map((item, index) => (
                 
                 <tr key={index}>
-                        <th scope="row">{item.date}</th>
-                        <th>{item.fromAccount}</th>
-                        <th>{item.amount}</th>
-                        <th>{item.toAccount}</th>
-                        <th>{item.notes}</th>
-                    <Link to={`/transactions/${item.id}`}>
-                        <button className="btn btn-info">
-                            <img src={ pencil } width="20" height="20" alt="Edit Transaction"/>
-                            
-                        </button>
-                    </Link>
+                        <td>{item.date}</td>
+                        <td>{item.fromAccount}</td>
+                        <td>{item.amount}</td>
+                        <td>{item.toAccount}</td>
+                        <td>{item.notes}</td>
+                        <td>
+                            <Link to={`/transactions/${item.id}`}>
+                                <button className="btn btn-info">
+                                    <img src={ pencil } width="20" height="20" alt="Edit Transaction"/>
+                                </button>
+                            </Link>
+                        </td>
                 </tr>
 
                         ))}

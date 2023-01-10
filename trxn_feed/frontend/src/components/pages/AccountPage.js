@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import AccTable from '../tables/AccTable';
-import { useAccountsContext } from '../context/AppContext';
 import Plus from '../../assets/Images/plus.svg';
+import { useAccountsContext } from '../context/AccountContext';
+
 
 
 
 
 const AccountPage = () => {
-    const { accounts, handleAccountSelect, selectedAccountId, handleAccountSubmit } = useAccountsContext()
+    const { accounts,  handleAccountAdd } = useAccountsContext()
     const [ ownAccounts, setOwnAccounts ] = useState(accounts.filter(function (account) {
       return account.type === "Own"
     }))
@@ -25,6 +26,7 @@ const AccountPage = () => {
       })
         setOwnAccounts(ownAcc)
         setFlowAccounts(flowAcc)
+        console.log("updated own and flow accounts")
 
 
     }, [accounts])
@@ -46,16 +48,14 @@ const AccountPage = () => {
   return (
     <div>
         <div className='feed-list sidebar-margin'>
-          <button className="btn btn-info">
+          <button className="btn btn-info" onClick={() => handleAccountAdd()}>
             <img src= { Plus }  className="img-fluid" width="70" height="50" alt="..."/>
           </button>
           <div className="p-5 m-5">
             <h2>Owner Accounts</h2>
             <AccTable header={Headers}
             data={ownAccounts}
-            handleAccountSelect={handleAccountSelect}
-            selectedAccountId={selectedAccountId}
-            handleAccountSubmit={handleAccountSubmit}
+          
             />
 
                 
@@ -64,9 +64,6 @@ const AccountPage = () => {
             <h2>Spend Accounts</h2>
             <AccTable header={Headers} 
             data={flowAccounts}
-            handleAccountSelect={handleAccountSelect}
-            selectedAccountId={selectedAccountId}
-            handleAccountSubmit={handleAccountSubmit}
             />
         
           </div>

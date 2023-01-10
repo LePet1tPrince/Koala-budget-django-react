@@ -19,6 +19,7 @@ import FeedData from "./components/tables/FeedData";
 import { AppContext } from "./components/context/AppContext";
 
 
+
 function App() {
 
   // const selectedTrxn = trxns.find(trxn => trxn.id === selectedTrxnId)
@@ -36,23 +37,24 @@ function App() {
   }
   
   return (
-    <AppContext>
-      <Router forceRefresh={true}>
-        <div>
-          <SideBar />
-          <Header />
-          <Route path="/" exact component={HomePage} />
-          <Route path="/transactions" exact component={TrxnsPage} />
-          {/* <Route path="/transactions/new" component={TrxnEdit} /> */}
-          <Route path="/transactions/:id" component={TrxnEdit}  />
-          <Route path="/accounts/:id" component={AccountPage} />
-          <Route path="/accounts" component={AccountPage} />
-          <Route path="/goals" component={GoalsPage} />
-          <Route path="/dashboard" component={Dashboard} />
-          <Route path="/test" component={FeedData} />
-        </div>
-      </Router>
-    </AppContext>
+      <AppContext>
+        <Router forceRefresh={true}>
+          <div>
+            <SideBar />
+            <Header />
+            <Route path="/" exact component={HomePage} />
+            <Route path="/transactions" exact component={TrxnsPage} />
+            {/* <Route path="/transactions/new" component={TrxnEdit} /> */}
+            <Route path="/transactions/:id" component={TrxnEdit}  />
+            <Route path="/accounts/:id" component={AccountPage} />
+            <Route path="/accounts" component={AccountPage} />
+            <Route path="/goals" component={GoalsPage} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/test" component={FeedData} />
+          </div>
+        </Router>
+      </AppContext>
+
   );
 }
 

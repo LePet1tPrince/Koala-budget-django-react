@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { useTrxnsContext, useAccountsContext } from '../context/AppContext';
+import { useTrxnsContext } from '../context/TrxnContext';
+import { useAccountsContext } from '../context/AccountContext';
 import {
   Link
 } from "react-router-dom";
