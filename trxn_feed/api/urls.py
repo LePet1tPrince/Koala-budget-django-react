@@ -20,6 +20,11 @@ urlpatterns = [
     path('dashboard/', views.getDashboard, name="dashboard"),
     path('test/', views.test, name="test"),
 
+    path('budget/', views.getBudget, name='budget'),
+    path('budget/<str:yr>', views.getBudgetByYear, name='budget-by-year'),
+    path('budget/<str:pk>/delete', views.deleteBudget, name='delete-budget')
+
+
 
 
 

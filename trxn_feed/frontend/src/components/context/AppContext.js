@@ -3,6 +3,7 @@ import { DashboardContext } from './DashboardContext';
 import { TrxnContext } from './TrxnContext';
 import { AccountContext } from './AccountContext';
 import { GoalContext } from './GoalContext';
+import { BudgetContext } from './BudgetContext';
 
 
 
@@ -13,7 +14,9 @@ export function AppContext({ children }) {
         <TrxnContext>
             <AccountContext>
                 <GoalContext>
+                  <BudgetContext>
                     {children}
+                  </BudgetContext>
                 </GoalContext>
             </AccountContext>
         </TrxnContext>

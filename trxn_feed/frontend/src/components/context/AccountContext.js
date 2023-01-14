@@ -15,6 +15,8 @@ export function AccountContext({ children }) {
     //State and variables
     const [accounts, setAccounts] = useState([])
     const [selectedAccountId, setSelectedAccountId] = useState([])
+    const accountTypeOptions = ['Own', 'Flow','Save']
+    const accountSubTypeOptions = ['Asset', 'Liability','Income', 'Expense']
 
     //Effect
     useEffect(() => {
@@ -109,6 +111,8 @@ export function AccountContext({ children }) {
 
     const AccountsContextValue = {
         accounts,
+        accountSubTypeOptions,
+        accountTypeOptions,
         setAccounts,
         getAccounts,
         handleAccountSelect,

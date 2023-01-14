@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from datetime import datetime
 from django.db.models import Q
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 #Accounts and categories
 class Account(models.Model):
@@ -9,6 +10,7 @@ class Account(models.Model):
         Own = 'Own'
         Flow = 'Flow'
         Save = 'Save'
+        Equity = 'Equity'
     
     class AccountSubTypes(models.TextChoices):
         Ass = 'Asset'
@@ -77,9 +79,27 @@ class Budget(models.Model):
         related_name='budget_category',
 
     )
-    month = models.DateField(auto_now_add=False)
 
-    budget =  models.DecimalField(max_digits=10,decimal_places=2)
+    class BudgetMonths(models.TextChoices):
+        Jan = 'Jan', _('January')
+        Feb = 'Feb', _('February')
+        Mar = 'Mar', _('March')
+        Apr = 'Apr', _('April')
+        May = 'May', _('May')
+        Jun = 'Jun', _('June')
+        Jul = 'Jul', _('July')
+        Aug = 'Aug', _('August')
+        Sep = 'Sep', _('September')
+        Oct = 'Oct', _('October')
+        Nov = 'Nov', _('November')
+        Dec = 'Dec', _('December')
+    
+
+
+    month = models.CharField(max_length=30, choices=BudgetMonths.choices)
+    year = models.IntegerField(validators=[MaxValueValidator(2100), MinValueValidator(2000)])
+
+    target =  models.DecimalField(max_digits=10,decimal_places=2)
     
     def __str__(self):
-        return str(self.category) + " - " + self.month.strftime("%b %Y")
+        return str(self.category) + " - " + self.month + " - " + str(self.year)

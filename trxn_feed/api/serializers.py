@@ -7,17 +7,6 @@ class AccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class TrxnSerializer(serializers.ModelSerializer):
-    # toAccount = serializers.CharField(source='toAccount.name')
-    # fromAccount = serializers.CharField(source='fromAccount.name')
-
-    # def update(self, instance, validated_data):
-    #     instance.toAccount = validated_data.get('toAccount', instance.toAccount)
-    #     instance.fromAccount = validated_data.get('fromAccount',instance.fromAccount)
-    #     instance.save()
-    #     return instance
-    
-    # fromAccount = AccountSerializer(read_only=True)
-    # toAccount = AccountSerializer(read_only=True)
     fromAccount = serializers.StringRelatedField()
     toAccount = serializers.StringRelatedField() 
         
@@ -31,6 +20,8 @@ class GoalSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class BudgetSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
+
     class Meta:
         model = Budget
-        fields = '__all__'
+        fields = ('id','month','year','target','category')

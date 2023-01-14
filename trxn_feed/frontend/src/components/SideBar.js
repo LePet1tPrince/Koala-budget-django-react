@@ -18,8 +18,10 @@ const SideBar = () => {
         <Link to="/">Home</Link>
         <Link to="/transactions">Transactions</Link>
         <Link to="/accounts">Accounts</Link>
+        <Link to="/budget">Budget</Link>
         <Link to="/goals">Goals</Link>
         <Link to="/dashboard">Dashboard</Link>
+
 
 
  

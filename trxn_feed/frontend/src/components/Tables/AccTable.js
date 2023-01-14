@@ -6,7 +6,12 @@ import { useAccountsContext } from '../context/AccountContext';
 
 
 const AccTable = (props) => {
-    const { handleAccountSelect, selectedAccountId, handleAccountSubmit, handleAccountDelete } = useAccountsContext();
+    const { handleAccountSelect,
+            selectedAccountId,
+            handleAccountSubmit,
+            handleAccountDelete,
+            accountTypeOptions,
+            accountSubTypeOptions } = useAccountsContext();
     const [editedAccount, setEditedAccount] = useState()
     const { header, data } = props;
 
@@ -72,8 +77,8 @@ const AccTable = (props) => {
                      defaultValue={acc.type}
                      onChange={e => handleAccountChange({type: e.target.value})}
                      >
-                            {data.map((account) => (
-                                <option key={account.id} value={account.type}>{account.type}</option>
+                            {accountTypeOptions.map((type) => (
+                                <option key={type} value={type}>{type}</option>
                             ))}
                         </select>
                         </td>                           
@@ -83,16 +88,19 @@ const AccTable = (props) => {
                     defaultValue={acc.subType}
                     onChange={e => handleAccountChange({subType: e.target.value})}
                     >
-                            {data.map((account, i) => (
-                                <option key={account.id} value={account.subType}>{account.subType}</option>
+                            {accountSubTypeOptions.map((type) => (
+                                <option key={type} value={type}>{type}</option>
                             ))}
                         </select>
                     </td>
                     <td>
-                        <button className="btn btn-success" onClick={() => handleAccountSubmit(editedAccount)}>
+                        <button className="btn btn-success mx-2" onClick={() => handleAccountSubmit(editedAccount)}>
                             Save
                         </button>
-                        <button className="btn btn-danger" onClick={() => handleAccountDelete(selectedAccountId)}>
+                        <button className="btn btn-primary mx-2" onClick={() => handleAccountSelect(undefined)}>
+                            Cancel
+                        </button>
+                        <button className="btn btn-danger mx-2" onClick={() => handleAccountDelete(selectedAccountId)}>
                             Delete
                         </button>
                     
