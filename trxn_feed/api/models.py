@@ -72,8 +72,8 @@ class Goal(models.Model):
 #Budget 
 class Budget(models.Model):
     category = models.ForeignKey(Account,
-        blank=False,#change to false
-        null=False,#change to false
+        blank=True,#change to false
+        null=True,#change to false
         on_delete=models.CASCADE,
         limit_choices_to=Q(type='Flow'),
         related_name='budget_category',

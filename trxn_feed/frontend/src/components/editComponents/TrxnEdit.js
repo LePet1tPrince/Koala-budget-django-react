@@ -42,9 +42,6 @@ function TrxnEdit({ match }) {
   }
 
 
-
-
-
     function handleSubmit(e, editedTrxn) {
       e.preventDefault();
       console.log("edited Trxn:", editedTrxn);
@@ -52,14 +49,9 @@ function TrxnEdit({ match }) {
       alert('successfully submitted')
     }
 
-
-
-
   return (
     <div className="sidebar-margin">
     
-
-        
           
     {selectedTrxn &&
       
@@ -67,7 +59,7 @@ function TrxnEdit({ match }) {
           <div className="d-flex w-50">
               <div className="mr-auto p-2">
                   <Link to="/transactions">
-                <button className="btn btn-info mx-3 mr-auto p-2" >&#60; Back to Feed {id}
+                <button className="btn btn-info mx-3 mr-auto p-2" >&#60; Back to Feed
                     </button>
                   </Link>
                     </div>

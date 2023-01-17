@@ -3,6 +3,7 @@
 @import './fonts.css';
 @import './trxnEdit.css';
 @import './sass/custom.css';
+@import './budgetTable.css';
 
 
 :root {
@@ -12,6 +13,7 @@
   --danger: #D25425;
   --info: #50A6D3;
   --light: #aac2bd;
+  --navbar: #b0d8cf;
 
 }
 
@@ -20,8 +22,8 @@
   }
   
   body {
-    /* background-color: var(--light); */
-    background: linear-gradient(90deg, rgba(46,131,183,.5) 27%, rgba(80,166,211,.5) 50%, rgba(40,154,130,.5) 75%);
+    background-color: var(--light);
+    /* background: linear-gradient(90deg, rgba(46,131,183,.5) 27%, rgba(80,166,211,.5) 50%, rgba(40,154,130,.5) 75%); */
   }
   
   /* On screens that are less than 700px wide, make the sidebar into a topbar

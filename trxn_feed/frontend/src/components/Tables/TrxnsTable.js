@@ -17,9 +17,9 @@ const TrxnsTable = (props) => {
      
 
   return (
-    <div className="table-responsive">
-        <table className="table table-striped">
-            <thead>
+    <div className="table-responsive relative overflow-x-auto shadow-md sm:rounded-lg">
+        <table className="table w-full text-sm text-left text-gray-500 dark:text-gray-400">
+            <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                 <tr>
                     {header.map((title, index) => (
                         <th scope="col" key={index}>{title}</th>

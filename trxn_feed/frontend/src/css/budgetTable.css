@@ -1,0 +1,12 @@
+.budget-input-field {
+    width: 50px;
+}
+
+.inactive {
+    display: none;
+}
+
+input.checkbox {
+    width: 15px;
+    height: 15px;
+}

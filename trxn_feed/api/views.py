@@ -63,8 +63,11 @@ def getFeed(request):
             id=data['id'],
             date=data['date'],
             toAccount=Account.objects.get(pk=int(data['toAccount'])),
+            # toAccount=data['toAccount'],
             amount=data['amount'],
             fromAccount=Account.objects.get(pk=int(data['fromAccount'])),
+            # fromAccount=data['fromAccount'],
+
             notes=data['notes'],
         )
         serializer = TrxnSerializer(trxn, data=data)
@@ -162,17 +165,46 @@ def getGoals(request):
 
 ## BUDGET##
 
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def getBudget(request):
-    budgets = Budget.objects.all()
-    serializer = BudgetSerializer(budgets, many=True)
-    return Response(serializer.data)
+    if request.method == "GET":
+        budgets = Budget.objects.all()
+        serializer = BudgetSerializer(budgets, many=True)
+        return Response(serializer.data)
+    elif request.method == "POST":
+        data = request.data
+        budget = Budget.objects.create(
+            id=data['id'],
+            month=data['month'],
+            year=data['year'],
+            target=data['target'],
+            category=Account.objects.get(pk=int(data['category']))
+        )
+        serializer = BudgetSerializer(budget, data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+
 
 @api_view(['GET'])
 def getBudgetByYear(request, yr):
     budgets = Budget.objects.filter(year = yr)
     serializer = BudgetSerializer(budgets, many=True)
     return Response(serializer.data)
+
+@api_view(['PUT'])
+def updateBudget(request, pk):
+    budget = get_object_or_404(Budget, pk=pk)
+    data = request.data
+    budget.target=float(data['target'])
+    budget.save()
+    serializer = BudgetSerializer(budget, data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 @api_view(['DELETE'])
 def deleteBudget(request, pk):

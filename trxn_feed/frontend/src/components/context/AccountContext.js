@@ -18,6 +18,18 @@ export function AccountContext({ children }) {
     const accountTypeOptions = ['Own', 'Flow','Save']
     const accountSubTypeOptions = ['Asset', 'Liability','Income', 'Expense']
 
+    const ownAccounts = accounts.filter(function (account) {
+        return account.type === "Own"
+    })
+
+    const flowAccounts = accounts.filter(function (account) {
+        return account.type === "Flow"
+    })
+
+    const saveAccounts = accounts.filter(function (account) {
+        return account.type === "Save"
+    })
+
     //Effect
     useEffect(() => {
         getAccounts();
@@ -78,9 +90,8 @@ export function AccountContext({ children }) {
             body: JSON.stringify(body)
         }).then((response) => {
             if (response.ok) {
-                console.log('Account created successfully');
-                // getTrxns();
-                // window.location = '/transactions/' + maxId+1
+                console.log('Account created successfully', maxId+1 );
+                getAccounts();
                 handleAccountSelect(maxId+1)
 
             } else {
@@ -113,6 +124,9 @@ export function AccountContext({ children }) {
         accounts,
         accountSubTypeOptions,
         accountTypeOptions,
+        ownAccounts,
+        flowAccounts,
+        saveAccounts,
         setAccounts,
         getAccounts,
         handleAccountSelect,
@@ -120,6 +134,7 @@ export function AccountContext({ children }) {
         handleAccountAdd,
         handleAccountDelete,
         selectedAccountId
+
     }
 
   return (

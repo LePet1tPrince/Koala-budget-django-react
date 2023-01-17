@@ -8,38 +8,7 @@ import { useAccountsContext } from '../context/AccountContext';
 
 
 const AccountPage = () => {
-    const { accounts,  handleAccountAdd } = useAccountsContext()
-    const [ ownAccounts, setOwnAccounts ] = useState(accounts.filter(function (account) {
-      return account.type === "Own"
-    }))
-    const [flowAccounts, setFlowAccounts ] = useState(accounts.filter(function (account) {
-      return account.type === "Flow"
-    }))
-
-    useEffect(() => {
-      var ownAcc = accounts.filter(function (account) {
-        return account.type === "Own"
-      })
-  
-      var flowAcc = accounts.filter(function (account) {
-        return account.type === "Flow"
-      })
-        setOwnAccounts(ownAcc)
-        setFlowAccounts(flowAcc)
-        console.log("updated own and flow accounts")
-
-
-    }, [accounts])
-
-   
-
-    // var ownAccounts2 = accounts.filter(function (account) {
-    //   return account.type === "Own"
-    // })
-
-    // var flowAccounts = accounts.filter(function (account) {
-    //   return account.type === "Flow"
-    // })
+    const { accounts,  handleAccountAdd, ownAccounts, flowAccounts } = useAccountsContext();
 
     const Headers = ['Account Number','Account Name','Account Type','Account Sub-Type']
 
@@ -48,9 +17,13 @@ const AccountPage = () => {
   return (
     <div>
         <div className='feed-list sidebar-margin'>
-          <button className="btn btn-info" onClick={() => handleAccountAdd()}>
-            <img src= { Plus }  className="img-fluid" width="70" height="50" alt="..."/>
-          </button>
+          <div className="d-flex justify-content-between">
+            <h1>Accounts</h1>
+            <button className="btn btn-info" onClick={() => handleAccountAdd()}>
+              <img src= { Plus }  className="img-fluid" width="70" height="50" alt="..."/>
+            </button>
+
+          </div>
           <div className="p-5 m-5">
             <h2>Owner Accounts</h2>
             <AccTable header={Headers}

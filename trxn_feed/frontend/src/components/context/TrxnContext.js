@@ -73,8 +73,8 @@ export function TrxnContext({ children }) {
             "date": "2023-01-01",
             "amount": 0,
             "notes": "Notes",
-            "toAccount": 1,
-            "fromAccount": 1
+            "toAccount": 3,
+            "fromAccount": 2        
 
         };
         
@@ -89,8 +89,8 @@ export function TrxnContext({ children }) {
         }).then((response) => {
             if (response.ok) {
                 console.log('Transaction created successfully');
-                // getTrxns();
-                window.location = '/transactions/' + maxId+1
+                getTrxns();
+                window.location = '/transactions/' + String(parseInt(maxId)+1)
 
             } else {
                 console.log('Error creating transaction')
