@@ -1,5 +1,5 @@
-from .models import Trxn, Account
-from .serializers import AccountSerializer, TrxnSerializer
+from .models import Trxn, Account, Budget
+from .serializers import AccountSerializer, TrxnSerializer, BudgetSerializer
 import pandas as pd
 import json
 
@@ -11,6 +11,12 @@ def calculate():
     #pull models
     accounts = pd.DataFrame(Account.objects.all().values())
     trxns = pd.DataFrame(Trxn.objects.all().values())
+    budget = pd.DataFrame(Budget.objects.all().values())
+  
+    budget.fillna(0, inplace=True)
+    budget.to_csv('./calculations/budget.csv')
+    trxns.to_csv('./calculations/transactions.csv')
+    accounts.to_csv('./calculations/accounts.csv')
     # df = pd.DataFrame(trxns)
 
     #calculate month number and month
@@ -33,3 +39,4 @@ def calculate():
     # # add = df.groupby(by="category_id").sum()
 
     # return(trxns_sum)
+    return (budget)

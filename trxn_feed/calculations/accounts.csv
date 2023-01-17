@@ -1,0 +1,8 @@
+,id,name,num,type,subType
+0,2,Credit Card,2004,Own,Asset
+1,3,Rent and insurance,50003,Flow,Expense
+2,4,Income,4003,Flow,Income
+3,5,Groceries,5003,Flow,Expense
+4,13,Bank Account,1002,Own,Asset
+5,14,yes,4,Save,Income
+6,27,Name,0,Own,Asset
