@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useBudgetContext } from '../context/BudgetContext';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import BudgetTable from '../tables/BudgetTable';
+import BudgetTable from '../Tables/BudgetTable';
 import { useAccountsContext } from '../context/AccountContext';
 
 export default function BudgetPage() {

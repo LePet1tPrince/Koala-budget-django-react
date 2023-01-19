@@ -216,8 +216,8 @@ def deleteBudget(request, pk):
 ##DASHBOARD###
 
 @api_view(['GET'])
-def getDashboard(request):
-    return Response(calculate())
+def getDashboard(request, st_dt, end_dt):
+    return Response(calculate(st_dt, end_dt))
 
 @api_view(['GET'])
 def test(request):

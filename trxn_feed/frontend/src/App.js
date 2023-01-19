@@ -4,21 +4,23 @@ import {
 } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import 'bootstrap';
-import './css/app.css';
+import './css/App.css';
 import Header from './components/Header';
 import TrxnsPage from './components/pages/TrxnsPage';
 import BudgetPage from './components/pages/BudgetPage';
-import BudgetTable from './components/tables/BudgetTable';
+import BudgetTable from './components/Tables/BudgetTable';
 import AccountPage from './components/pages/AccountPage';
 import TrxnPage from './components/detailView/TrxnPage';
 import SideBar from './components/SideBar';
 import GoalsPage from './components/pages/GoalsPage'
 import Dashboard from "./components/pages/Dashboard";
+import DashboardPage from "./components/pages/DashboardPage";
+
 import TrxnEdit from "./components/editComponents/TrxnEdit";
 import HomePage from "./components/pages/HomePage";
 
 import { v4 as uuidv4 } from 'uuid' ;
-import FeedData from "./components/tables/FeedData";
+import FeedData from "./components/Tables/FeedData";
 import { AppContext } from "./components/context/AppContext";
 
 
@@ -53,7 +55,7 @@ function App() {
             <Route path="/accounts/:id" component={AccountPage} />
             <Route path="/accounts" component={AccountPage} />
             <Route path="/goals" component={GoalsPage} />
-            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/dashboard" component={DashboardPage} />
             <Route path="/budget" component={BudgetPage} />
             {/* <Route path="/budget/:yr" component={BudgetTable} /> */}
 

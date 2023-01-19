@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useBudgetContext } from '../context/BudgetContext';
 import { useParams } from 'react-router-dom';
 import { useAccountsContext } from '../context/AccountContext';
-import pencil from '../../assets/Images/pencil-icon.png';
+import pencil from '../../Assets/Images/pencil-icon.png';
 
 
 export default function BudgetTable({ accounts }) {

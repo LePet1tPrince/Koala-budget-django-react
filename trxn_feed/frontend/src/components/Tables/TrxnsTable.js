@@ -2,7 +2,7 @@ import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { AccountContext } from '../pages/AccountPage';
 import { useTrxnsContext } from '../context/TrxnContext';
-import pencil from '../../assets/Images/pencil-icon.png';
+import pencil from '../../Assets/Images/pencil-icon.png';
 
 
 const TrxnsTable = (props) => {

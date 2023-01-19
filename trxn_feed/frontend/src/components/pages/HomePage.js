@@ -1,6 +1,6 @@
 import React from 'react';
-import koala from '../../assets/Images/Koala.jpg';
-import koalaTree from '../../assets/Images/koalaTree.png';
+import koala from '../../Assets/Images/Koala.jpg';
+import koalaTree from '../../Assets/Images/koalaTree.png';
 
 
 

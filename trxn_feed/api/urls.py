@@ -17,7 +17,8 @@ urlpatterns = [
 
 
     path('goals/', views.getGoals, name="goals"),
-    path('dashboard/', views.getDashboard, name="dashboard"),
+
+    path('dashboard/<str:st_dt>_<str:end_dt>', views.getDashboard, name="dashboard"),
     path('test/', views.test, name="test"),
 
     path('budget/', views.getBudget, name='budget'),

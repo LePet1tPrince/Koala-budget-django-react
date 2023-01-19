@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react'
-import csrftoken from '../../assets/csrftoken'
+import csrftoken from '../../Assets/csrftoken'
 import { v4 as uuidv4 } from 'uuid' ;
 
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import AccTable from '../tables/AccTable';
-import Plus from '../../assets/Images/plus.svg';
+import AccTable from '../Tables/AccTable';
+import Plus from '../../Assets/Images/plus.svg';
 import { useAccountsContext } from '../context/AccountContext';
 
 

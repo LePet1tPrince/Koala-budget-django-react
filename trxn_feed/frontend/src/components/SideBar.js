@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import leftChevron from '../assets/Images/leftChevron.png';
-import rightChevron from '../assets/Images/rightChevron.png';
+import leftChevron from '../Assets/Images/leftChevron.png';
+import rightChevron from '../Assets/Images/rightChevron.png';
 import SidebarLink from './SidebarLink';
-import barChart from '../assets/Images/bar-chart.png';
-import receipt from '../assets/Images/receipt-solid.svg';
-import home from '../assets/Images/home.png';
-import dollar from '../assets/Images/dollar-sign-solid.svg';
-import piggyBank from '../assets/Images/piggy-bank.png';
-import register from '../assets/Images/cash-register-solid.svg';
+import barChart from '../Assets/Images/bar-chart.png';
+import receipt from '../Assets/Images/receipt-solid.svg';
+import home from '../Assets/Images/home.png';
+import dollar from '../Assets/Images/dollar-sign-solid.svg';
+import piggyBank from '../Assets/Images/piggy-bank.png';
+import register from '../Assets/Images/cash-register-solid.svg';
 
 
 

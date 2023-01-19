@@ -1,8 +1,7 @@
 import React, { useContext } from 'react';
-import TrxnsTable from '../tables/TrxnsTable';
-import Plus from '../../assets/Images/plus.svg';
+import TrxnsTable from '../Tables/TrxnsTable';
+import Plus from '../../Assets/Images/plus.svg';
 import { Link } from 'react-router-dom';
-import FeedData from '../tables/FeedData';
 import { useTrxnsContext } from '../context/TrxnContext';
 import { useAccountsContext } from '../context/AccountContext';
 

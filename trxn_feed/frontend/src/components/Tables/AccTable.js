@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import pencil from '../../assets/Images/pencil-icon.png';
+import pencil from '../../Assets/Images/pencil-icon.png';
 import { useAccountsContext } from '../context/AccountContext';
 
 
