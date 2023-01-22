@@ -12,8 +12,7 @@ import BudgetTable from './components/Tables/BudgetTable';
 import AccountPage from './components/pages/AccountPage';
 import TrxnPage from './components/detailView/TrxnPage';
 import SideBar from './components/SideBar';
-import GoalsPage from './components/pages/GoalsPage'
-import Dashboard from "./components/pages/Dashboard";
+import GoalsPage from './components/pages/GoalsPage';
 import DashboardPage from "./components/pages/DashboardPage";
 
 import TrxnEdit from "./components/editComponents/TrxnEdit";

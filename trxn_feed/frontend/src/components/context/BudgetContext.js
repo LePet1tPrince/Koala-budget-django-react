@@ -24,14 +24,14 @@ export function BudgetContext({ children }) {
       let response = await fetch('/api/budget/')
       let budgetData = await response.json()
       setBudget(budgetData)
-      console.log(budgetData)
+      // console.log(budgetData)
     }
 
     let getBudgetByYear = async (yr) => {
       let response = await fetch(`/api/budget/${yr}`)
       let budgetData = await response.json()
       setBudgetByYear(budgetData)
-      console.log(budgetData)
+      // console.log(budgetData)
     }
 
     useEffect(() => {

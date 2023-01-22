@@ -13,41 +13,31 @@ export function DashboardContext({ children }) {
 
   // Dashboard //
     //state
-    const [barData, setBarData] = useState([])
-    const [dateRange, setDateRange] = useState()
+    const [balancesByDate, setBalancesByDate] = useState()
+    const [dateRange, setDateRange] = useState({startDate: '2023-01-01', endDate: '2023-01-30'})
 
-    let getDashboard = async (dates) => {
-        let response = await fetch(`/api/dashboard/${dates[0]}_${dates[1]}`)
+    let getDashboard = async () => {
+        let response = await fetch(`/api/dashboard/${dateRange.startDate}_${dateRange.endDate}`)
         let data = await response.json()
-        setBarData(data);
+        setBalancesByDate(data);
+        console.log(data)
     }
 
     //Use Effect
-    
     useEffect(() => {
-        getDashboard()
-    },[])
-
-    useEffect(() => {
-      getDashboard(dateRange)
+      getDashboard();
 
     },[dateRange])
 
     // set values
 
-    function setDates(start_date, end_date) {
-      getDashboard([start_date, end_date])
-    }
-
-    function handleDateRangeSelect() {
-      
-    }
 
     const DashboardContextValue = {
-        barData,
-        setBarData,
-        setDates,
-        dateRange
+        balancesByDate,
+        dateRange,
+        setDateRange
+  
+     
     }
 
 

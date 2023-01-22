@@ -6,7 +6,7 @@ import json
 
 
 
-def calculate(start_date, end_date):
+def DashboardAPI(start_date, end_date):
 
     #function to get the account balance between certain times of a specific account.
     def get_balance(start_date, end_date, accountName):
@@ -20,19 +20,42 @@ def calculate(start_date, end_date):
         if len(toTrxns) > 0:
             category_balance += toTrxns.aggregate(Sum('amount'))['amount__sum']  
         if len(fromTrxns) >0:
-            category_balance += fromTrxns.aggregate(Sum('amount'))['amount__sum']
+            category_balance -= fromTrxns.aggregate(Sum('amount'))['amount__sum']
         
         
         return category_balance
 
     accounts = Account.objects.all()
     account_balance_dict = {}
+    #create a list of actual balances.
     for acc in accounts:
         account_balance_dict[acc.name] = get_balance(start_date, end_date, acc.name)
 
-    tot = get_balance('2022-01-01', '2023-12-30', 'Bank Account')
 
-    return (account_balance_dict)
+    
+    def createBarChartJSON(balance_dict):
+        data = []
+        for k in balance_dict:
+            entry = {}
+            entry['x'] = k
+            entry['y'] = balance_dict[k]
+            entry['goals'] = {}
+            entry['goals']['name'] = 'Budget'
+            try:
+                entry['goals']['value'] = Budget.objects.filter(category__exact='Income')
+            except:
+                entry['goals']['value'] = 0
+            entry['goals']['strokeColor'] = '#775DD0'
+            entry['goals'] = [entry['goals']]
+
+            data.append(entry)
+        return [{'data': data}]
+        
+
+
+    return (createBarChartJSON(account_balance_dict))
+    # return (account_balance_dict)
+
 
    
    #pull models

@@ -7,7 +7,7 @@ from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser 
 from .models import Trxn, Account, Goal, Budget
 from .serializers import TrxnSerializer, AccountSerializer, GoalSerializer, BudgetSerializer
-from .dashboard import calculate
+from .dashboard import DashboardAPI
 # from api import serializers
 
 
@@ -217,7 +217,7 @@ def deleteBudget(request, pk):
 
 @api_view(['GET'])
 def getDashboard(request, st_dt, end_dt):
-    return Response(calculate(st_dt, end_dt))
+    return Response(DashboardAPI(st_dt, end_dt))
 
 @api_view(['GET'])
 def test(request):
