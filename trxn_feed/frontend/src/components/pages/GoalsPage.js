@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import GoalTable from '../Tables/GoalTable';
-
+import { apiEndPoint } from '../../Assets/apiEndPoint';
 
 const GoalsPage = () => {
 
@@ -12,7 +12,7 @@ const GoalsPage = () => {
     }, [])
 
     let getGoals = async () => {
-        let response = await fetch('/api/goals/')
+        let response = await fetch(`${apiEndPoint}/api/goals/`)
         let data = await response.json()
         setGoals(data)
         console.log(data)

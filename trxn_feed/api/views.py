@@ -45,6 +45,68 @@ def getRoutes(request):
             'body': None,
             'description': 'Deletes and existing transaction'
         },
+        {
+            'Endpoint': '/accounts/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Retrieve list of accounts'
+        },
+        {
+            'Endpoint': '/accounts/id',
+            'method': 'accounts',
+            'body': None,
+            'description': 'Retreives single account for viewing'
+        },
+        {
+            'Endpoint': '/accounts/id/update',
+            'method': 'PUT',
+            'body': None,
+            'description': 'Update Account'
+        },
+        {
+            'Endpoint': '/accounts/id/delete',
+            'method': 'DELETE',
+            'body': None,
+            'description': 'Deletes and existing transaction'
+        },
+        {
+            'Endpoint': '/goals/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Fetch list of goal transactions'
+        },
+        {
+            'Endpoint': '/dashboard/startdate_enddate',
+            'method': 'GET',
+            'body': None,
+            'description': 'Returns data to populate chart data based on start date and end date'
+        },
+        {
+            'Endpoint': '/budget/',
+            'method': 'GET',
+            'body': None,
+            'description': 'Return budget data'
+        },
+        {
+            'Endpoint': '/budget/year',
+            'method': 'GET',
+            'body': None,
+            'description': 'Return budget data for a specific year'
+        },
+        {
+            'Endpoint': '/budget/id/delete',
+            'method': 'DELETE',
+            'body': None,
+            'description': 'Delete a budget (I dont think this is still active, it will just update to 0)'
+        },
+        {
+            'Endpoint': '/budget/id/update',
+            'method': 'PUT',
+            'body': None,
+            'description': 'Update a budget'
+        }
+
+
     ]
     return Response(routes)
 

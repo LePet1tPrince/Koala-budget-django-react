@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useContext } from 'react';
 import csrftoken from '../../Assets/csrftoken';
-import { v4 as uuidv4 } from 'uuid' ;
 import { useAccountsContext } from './AccountContext';
+import { apiEndPoint } from '../../Assets/apiEndPoint';
+
 
 const BudgetsContext = React.createContext()
 
@@ -21,14 +22,14 @@ export function BudgetContext({ children }) {
 
     
     let getBudget = async () => {
-      let response = await fetch('/api/budget/')
+      let response = await fetch(`${apiEndPoint}/api/budget/`)
       let budgetData = await response.json()
       setBudget(budgetData)
       // console.log(budgetData)
     }
 
     let getBudgetByYear = async (yr) => {
-      let response = await fetch(`/api/budget/${yr}`)
+      let response = await fetch(`${apiEndPoint}/api/budget/${yr}`)
       let budgetData = await response.json()
       setBudgetByYear(budgetData)
       // console.log(budgetData)
@@ -59,7 +60,7 @@ export function BudgetContext({ children }) {
 
       }
         
-      fetch('/api/budget/', {
+      fetch(`${apiEndPoint}/api/budget/`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -119,7 +120,7 @@ export function BudgetContext({ children }) {
     }
 
     function handleNewBudget(body, id) {
-      fetch('/api/budget/', {
+      fetch(`${apiEndPoint}/api/budget/`, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -143,7 +144,7 @@ export function BudgetContext({ children }) {
     }
 
     function handleBudgetUpdate(newBudget) {
-      fetch(`/api/budget/${newBudget.id}/update`, {
+      fetch(`${apiEndPoint}/api/budget/${newBudget.id}/update`, {
         method: "PUT",
         headers: {
           'Accept': 'application/json',

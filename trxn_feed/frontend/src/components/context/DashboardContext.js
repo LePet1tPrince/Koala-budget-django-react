@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import csrftoken from '../../Assets/csrftoken'
 import { v4 as uuidv4 } from 'uuid' ;
+import { apiEndPoint } from '../../Assets/apiEndPoint';
 
 
 const DashboardsContext = React.createContext()
@@ -17,7 +18,7 @@ export function DashboardContext({ children }) {
     const [dateRange, setDateRange] = useState({startDate: '2023-01-01', endDate: '2023-01-30'})
 
     let getDashboard = async () => {
-        let response = await fetch(`/api/dashboard/${dateRange.startDate}_${dateRange.endDate}`)
+        let response = await fetch(`${apiEndPoint}/api/dashboard/${dateRange.startDate}_${dateRange.endDate}`)
         let data = await response.json()
         setBalancesByDate(data);
         console.log(data)

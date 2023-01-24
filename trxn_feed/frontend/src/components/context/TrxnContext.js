@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import csrftoken from '../../Assets/csrftoken'
 import { v4 as uuidv4 } from 'uuid' ;
+import { apiEndPoint } from '../../Assets/apiEndPoint';
 
 
 const TrxnsContext = React.createContext()
@@ -28,14 +29,14 @@ export function TrxnContext({ children }) {
 
     //functions
     let getTrxns = async () => {
-        let response = await fetch('/api/feed/')
+        let response = await fetch(`${apiEndPoint}/api/feed/`)
         let trxnsData = await response.json()
         // console.log("transactions = ", trxnsData)
         setTrxns(trxnsData)
     }
 
     let updateTrxns = async (trxn) => {
-        fetch(`/api/feed/${trxn.id}/update`, {
+        fetch(`${apiEndPoint}/api/feed/${trxn.id}/update`, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json',
@@ -78,7 +79,7 @@ export function TrxnContext({ children }) {
 
         };
         
-        fetch(`/api/feed/`, {
+        fetch(`${apiEndPoint}/api/feed/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -99,7 +100,7 @@ export function TrxnContext({ children }) {
     }
 
     function handleTrxnDelete(id) {
-        fetch(`/api/feed/${id}/delete`, {
+        fetch(`${apiEndPoint}/api/feed/${id}/delete`, {
             method: 'DELETE',
             headers: {
                 'Content-Type' : 'application/json',

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react'
 import csrftoken from '../../Assets/csrftoken'
 import { v4 as uuidv4 } from 'uuid' ;
-
+import { apiEndPoint } from '../../Assets/apiEndPoint';
 
 const GoalsContext = React.createContext()
 
@@ -25,7 +25,7 @@ export function GoalContext({ children }) {
     //functions
 
     let getGoals = async () => {
-        let response = await fetch('/api/goals/')
+        let response = await fetch(`${apiEndPoint}/api/goals/`)
         let data = await response.json()
         setGoals(data)
         // console.log(data)

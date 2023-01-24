@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
 import csrftoken from '../../Assets/csrftoken'
-import { v4 as uuidv4 } from 'uuid' ;
+import { apiEndPoint } from '../../Assets/apiEndPoint';
 
 const AccountsContext = React.createContext()
 
@@ -37,14 +37,14 @@ export function AccountContext({ children }) {
 
     // functions
     let getAccounts = async () => {
-        let response = await fetch('/api/accounts/')
+        let response = await fetch(`${apiEndPoint}/api/accounts/`)
         let accdata = await response.json()
         setAccounts(accdata)
         // console.log("accounts =", accdata)
     }
 
     let updateAccount = async (account) => {
-        fetch(`/api/accounts/${account.id}/update`, {
+        fetch(`${apiEndPoint}/api/accounts/${account.id}/update`, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json',
@@ -80,7 +80,7 @@ export function AccountContext({ children }) {
 
         };
         
-        fetch(`/api/accounts/`, {
+        fetch(`${apiEndPoint}/api/accounts/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -102,7 +102,7 @@ export function AccountContext({ children }) {
 
 
     function handleAccountDelete(id) {
-        fetch(`/api/accounts/${id}/delete`, {
+        fetch(`${apiEndPoint}/api/accounts/${id}/delete`, {
             method: 'DELETE',
             headers: {
                 'Content-Type' : 'application/json',
