@@ -84,7 +84,7 @@ function TrxnEdit({ match }) {
             defaultValue={selectedTrxn.fromAccount}
             onChange={e => handleChange({fromAccount: e.target.value})}
             >
-              {accounts.map((account, index) => (
+              {accounts.sort((a,b) => a.num - b.num).map((account, index) => (
                 <option key={index} value={account.id}>{account.name}  - {account.subType}</option>
               ))}
             </select>
@@ -106,7 +106,7 @@ function TrxnEdit({ match }) {
             defaultValue={selectedTrxn.toAccount}
             onChange={e => handleChange({toAccount: e.target.value})}
             >
-               {accounts.map((account, index) => (
+               {accounts.sort((a,b) => a.num - b.num).map((account, index) => (
                 <option key={index} value={account.id}>{account.name} - {account.subType}</option>
               ))}
             </select>

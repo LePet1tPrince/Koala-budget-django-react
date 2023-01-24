@@ -25,7 +25,7 @@ const TrxnsPage = () => {
                 </div>
               <TrxnsTable
                 header={Headers}
-                data={trxns}
+                data={trxns.sort((a, b) => a.date - b.date)}
                 />
             </div>
         </div>

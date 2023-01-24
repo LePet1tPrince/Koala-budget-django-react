@@ -1,4 +1,4 @@
-from django.db.models import Sum
+from django.db.models import Sum, Q
 from .models import Trxn, Account, Budget
 from .serializers import AccountSerializer, TrxnSerializer, BudgetSerializer
 import pandas as pd
@@ -35,14 +35,20 @@ def DashboardAPI(start_date, end_date):
     
     def createBarChartJSON(balance_dict):
         data = []
+        print(Budget._meta.get_fields())
+
         for k in balance_dict:
             entry = {}
             entry['x'] = k
             entry['y'] = balance_dict[k]
             entry['goals'] = {}
             entry['goals']['name'] = 'Budget'
+            # budgetId = Budget.
+            accountName = Account.objects.get(name=k)
+            # print(Budget.objects.filter(category=accountName).first().category)
             try:
-                entry['goals']['value'] = Budget.objects.filter(category__exact='Income')
+                entry['goals']['value'] = Budget.objects.filter(category=accountName).first().target
+
             except:
                 entry['goals']['value'] = 0
             entry['goals']['strokeColor'] = '#775DD0'

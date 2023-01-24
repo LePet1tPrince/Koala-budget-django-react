@@ -39,7 +39,7 @@ const SideBar = () => {
          <SidebarLink path="/accounts" text="Accounts" setActiveLink={setActiveLink} icon={piggyBank}/>
          <SidebarLink path="/budget" text="Budget" setActiveLink={setActiveLink} icon={register}/>
          <SidebarLink path="/goals" text="Goals" setActiveLink={setActiveLink} icon={dollar}/>
-         <SidebarLink path="/dashboard" text="Dasbhoard" setActiveLink={setActiveLink} icon={barChart}/>
+         <SidebarLink path="/dashboard" text="Dashboard" setActiveLink={setActiveLink} icon={barChart}/>
 
      
 

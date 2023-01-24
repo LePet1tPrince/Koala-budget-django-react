@@ -20,11 +20,11 @@ export function AccountContext({ children }) {
 
     const ownAccounts = accounts.filter(function (account) {
         return account.type === "Own"
-    })
+    }).sort((a, b) => a.num - b.num);
 
     const flowAccounts = accounts.filter(function (account) {
         return account.type === "Flow"
-    })
+    }).sort((a, b) => a.num - b.num);
 
     const saveAccounts = accounts.filter(function (account) {
         return account.type === "Save"
