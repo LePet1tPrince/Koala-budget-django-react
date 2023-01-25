@@ -10,11 +10,25 @@ import { useDashboardContext } from "../context/DashboardContext";
 
 export default function DashboardPage() {
 
-  const { balancesByDate, dateRange, setDateRange } = useDashboardContext();
+  const { barChartData, dateRange, setDateRange } = useDashboardContext();
 
 
   function handleDateChange(change) {
     setDateRange({...dateRange, ...change})
+
+  }
+
+  const barChartOptions = {
+    chart: {
+      type: 'bar',
+      id: "basic-bar"
+    },
+    plotOptions: {
+      bar: {
+        horizontal: true,
+        borderRadius: 4
+      }
+    }
 
   }
 
@@ -35,7 +49,13 @@ export default function DashboardPage() {
         </form>
 
         {/* <div>{JSON.stringify(balancesByDate)}</div> */}
-        <BarChart/>
+        {barChartData && <div>
+
+        <BarChart barChartOptions={barChartOptions} data={barChartData.Income}/>
+        <BarChart barChartOptions={barChartOptions} data={barChartData.Expense}/>
+        </div>
+        }
+
        
       </div>
   )

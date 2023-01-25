@@ -14,13 +14,13 @@ export function DashboardContext({ children }) {
 
   // Dashboard //
     //state
-    const [balancesByDate, setBalancesByDate] = useState()
+    const [barChartData, setBarChartData] = useState()
     const [dateRange, setDateRange] = useState({startDate: '2023-01-01', endDate: '2023-01-30'})
 
     let getDashboard = async () => {
         let response = await fetch(`${apiEndPoint}/api/dashboard/${dateRange.startDate}_${dateRange.endDate}`)
         let data = await response.json()
-        setBalancesByDate(data);
+        setBarChartData(data);
         console.log(data)
     }
 
@@ -34,7 +34,7 @@ export function DashboardContext({ children }) {
 
 
     const DashboardContextValue = {
-        balancesByDate,
+        barChartData,
         dateRange,
         setDateRange
   

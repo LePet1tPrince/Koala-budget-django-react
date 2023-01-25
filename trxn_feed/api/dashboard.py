@@ -22,18 +22,47 @@ def DashboardAPI(start_date, end_date):
         if len(fromTrxns) >0:
             category_balance -= fromTrxns.aggregate(Sum('amount'))['amount__sum']
         
-        
         return category_balance
 
-    accounts = Account.objects.all()
-    account_balance_dict = {}
-    #create a list of actual balances.
-    for acc in accounts:
-        account_balance_dict[acc.name] = get_balance(start_date, end_date, acc.name)
+
+    def get_budget_from_month(month, year, category):
+        account_num = Account.objects.filter(name=category).first().id
+        # print(account_num)
+        budget_object = Budget.objects.filter(month=month, year=year, category=account_num)
+        if len(budget_object) > 1:
+            print(f'Error: multiple budgets fit this criteria, {month} - {year} - {category}')
+            target = 9999
+        elif len(budget_object) == 0:
+            target = 0
+        else:
+            target = budget_object.first().target
+        # print(target)
+
+        return target
+
+    #this function takes in start and end date and cateogory, gets the months in the date range, and sums the budgets for those months
+    def get_budget_from_date_range(start_date,end_date, category):
+        month_list = pd.period_range(start=start_date, end=end_date, freq='M')
+        month_list = [[month.strftime("%b"), month.strftime("%Y")] for month in month_list]
+        total_budget = 0
+        for e in month_list:
+            total_budget += get_budget_from_month(e[0],e[1],category)
+        # print(total_budget)
+        return total_budget
+    
+
+
+    def get_balance_dict(subType):
+        account_balance_dict = {}
+        account_accounts = Account.objects.filter(subType=subType)
+        for acc in account_accounts:
+            account_balance_dict[acc.name] = get_balance(start_date, end_date, acc.name)
+        return account_balance_dict
+    
 
 
     
-    def createBarChartJSON(balance_dict):
+    def createBarChartJSON(balance_dict, actualColor, budgetColor):
         data = []
         print(Budget._meta.get_fields())
 
@@ -41,25 +70,23 @@ def DashboardAPI(start_date, end_date):
             entry = {}
             entry['x'] = k
             entry['y'] = balance_dict[k]
+            entry['fillColor'] = actualColor
             entry['goals'] = {}
             entry['goals']['name'] = 'Budget'
-            # budgetId = Budget.
-            accountName = Account.objects.get(name=k)
-            # print(Budget.objects.filter(category=accountName).first().category)
+            # accountName = Account.objects.get(name=k)
             try:
-                entry['goals']['value'] = Budget.objects.filter(category=accountName).first().target
-
+                entry['goals']['value'] = get_budget_from_date_range(start_date,end_date,k)
             except:
                 entry['goals']['value'] = 0
-            entry['goals']['strokeColor'] = '#775DD0'
+            entry['goals']['strokeColor'] = budgetColor
             entry['goals'] = [entry['goals']]
 
             data.append(entry)
         return [{'data': data}]
         
 
-
-    return (createBarChartJSON(account_balance_dict))
+    chartData = {"Income": createBarChartJSON(get_balance_dict('Income'),'#2E83B7' ,'#289A82'), "Expense":createBarChartJSON(get_balance_dict('Expense'),'#D25425' ,'#289A82')}
+    return (chartData)
     # return (account_balance_dict)
 
 
