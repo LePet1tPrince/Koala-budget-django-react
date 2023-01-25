@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-p^s_#^o8-=cmenn!0a*^p41ecnl=7m*)-(gf5@p2pm%e-6b=so
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["18.222.31.122"]
+ALLOWED_HOSTS = ["18.116.243.208"]
 
 
 # Application definition
@@ -134,6 +134,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",
     "http://127.0.0.1:3000",
     "http://18.222.31.122:8000",
-    "https://frabjous-bavarois-1924d9.netlify.app"
+    "https://frabjous-bavarois-1924d9.netlify.app",
+    "https://frabjous-bavarois-1924d9.netlify.app",
+    "http://18.116.243.208"
 
 ]
