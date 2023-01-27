@@ -28,6 +28,7 @@ export default function BudgetPage() {
 
   return (
     <div className="sidebar-margin">
+      <h1>Budget</h1>
 
       <div className="justify-items-accross">
         {years.map((item) => (

@@ -22,6 +22,7 @@ const GoalsPage = () => {
 
   return (
     <div className="sidebar-margin">
+      <h1>Goals</h1>
         <div className='feed-list'>
             <div className="p-5 m-5">
             <GoalTable header={Headers} data={goals} />

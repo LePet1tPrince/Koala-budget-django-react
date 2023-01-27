@@ -1,0 +1,14 @@
+@import './fonts.css';
+@import './animations.css';
+@import './responsive.css';
+
+
+
+.fullscreen {
+    min-height: 120vh;
+};
+
+.fit-content {
+    width: fit-content;
+    block-size: fit-content;
+}

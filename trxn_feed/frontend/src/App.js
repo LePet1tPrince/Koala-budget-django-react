@@ -46,7 +46,7 @@ function App() {
         <Router forceRefresh={true}>
           <div>
             <SideBar />
-            <Header />
+            {/* <Header /> */}
             <Route path="/" exact component={HomePage} />
             <Route path="/transactions" exact component={TrxnsPage} />
             {/* <Route path="/transactions/new" component={TrxnEdit} /> */}

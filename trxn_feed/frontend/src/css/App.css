@@ -1,9 +1,11 @@
+@import './csstemplates/main.css';
 @import './Navbar.css';
 @import './table.css';
 @import './fonts.css';
 @import './trxnEdit.css';
 @import './sass/custom.css';
 @import './budgetTable.css';
+@import './HomePage.css';
 
 
 :root {
@@ -22,7 +24,7 @@
   }
   
   body {
-    background-color: var(--light);
+    /* background-color: var(--light); */
     /* background: linear-gradient(90deg, rgba(46,131,183,.5) 27%, rgba(80,166,211,.5) 50%, rgba(40,154,130,.5) 75%); */
   }
   

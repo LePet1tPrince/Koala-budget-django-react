@@ -1,0 +1,42 @@
+
+/*  Hover Grow */
+
+.grow-hover { 
+    transition: all .2s ease-in-out; 
+    }
+
+  .grow-hover :hover {
+    /* transform: scale(1.1); */
+    font-size: larger!important;
+  }
+
+  /* Fade in */
+
+
+  .fade-in {
+	animation: fadeInAnimation ease 2s;
+	animation-iteration-count: 1;
+	animation-fill-mode: forwards;
+}
+
+@keyframes fadeInAnimation {
+	0% {
+		opacity: 0;
+    /* transform: translateY(100%); */
+    offset: translateY(200px);
+	}
+	100% {
+		opacity: 1;
+	}
+}
+
+
+
+.fade-in-test {
+  animation: fade-in-test 1s;
+}
+
+@keyframes fade-in-test {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
