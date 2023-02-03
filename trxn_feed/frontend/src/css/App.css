@@ -6,6 +6,7 @@
 @import './sass/custom.css';
 @import './budgetTable.css';
 @import './HomePage.css';
+@import './TransactionsPage.css';
 
 
 :root {

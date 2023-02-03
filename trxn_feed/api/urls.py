@@ -3,11 +3,12 @@ from . import views
 
 urlpatterns = [
     path('',views.getRoutes, name="routes"),
-    path('feed/', views.getFeed, name="feed"),
-    # path('feed/create', views.createTrxn, name="post-trxn"),
-    path('feed/<str:pk>', views.getTrxn, name="trxn"),
-    path('feed/<str:pk>/update', views.updateTrxn, name="update-trxn"),
-    path('feed/<str:pk>/delete', views.deleteTrxn, name="delete-trxn"),
+    path('trxns/', views.getTrxns, name="trxns"),
+    path('trxns/<str:id>', views.getFilteredTrxns, name="filtered-trxns"),
+
+    path('trxns/<str:pk>', views.getTrxn, name="trxn"),
+    path('trxns/<str:pk>/update', views.updateTrxn, name="update-trxn"),
+    path('trxns/<str:pk>/delete', views.deleteTrxn, name="delete-trxn"),
 
 
     path('accounts/', views.getAccounts, name="accounts"),

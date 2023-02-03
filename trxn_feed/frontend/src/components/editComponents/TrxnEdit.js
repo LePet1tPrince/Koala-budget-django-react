@@ -46,7 +46,7 @@ function TrxnEdit({ match }) {
       e.preventDefault();
       console.log("edited Trxn:", editedTrxn);
       handleTrxnSubmit(editedTrxn)
-      alert('successfully submitted')
+      // alert('successfully submitted')
     }
 
   return (

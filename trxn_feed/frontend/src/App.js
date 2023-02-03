@@ -10,7 +10,6 @@ import TrxnsPage from './components/pages/TrxnsPage';
 import BudgetPage from './components/pages/BudgetPage';
 import BudgetTable from './components/Tables/BudgetTable';
 import AccountPage from './components/pages/AccountPage';
-import TrxnPage from './components/detailView/TrxnPage';
 import SideBar from './components/SideBar';
 import GoalsPage from './components/pages/GoalsPage';
 import DashboardPage from "./components/pages/DashboardPage";
@@ -51,6 +50,8 @@ function App() {
             <Route path="/transactions" exact component={TrxnsPage} />
             {/* <Route path="/transactions/new" component={TrxnEdit} /> */}
             <Route path="/transactions/:id" component={TrxnEdit}  />
+            <Route path="/transactions/:accid" component={TrxnsPage}  />
+
             <Route path="/accounts/:id" component={AccountPage} />
             <Route path="/accounts" component={AccountPage} />
             <Route path="/goals" component={GoalsPage} />

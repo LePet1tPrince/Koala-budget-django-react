@@ -114,10 +114,10 @@ def getRoutes(request):
 ##TRXNS
 #transaction feed
 @api_view(['GET', 'POST'])
-def getFeed(request):
+def getTrxns(request):
     if request.method == "GET":
-        feed = Trxn.objects.all() 
-        serializer = TrxnSerializer(feed, many=True)
+        trxns = Trxn.objects.all() 
+        serializer = TrxnSerializer(trxns, many=True)
         return Response(serializer.data)
     elif request.method == "POST":
         data = request.data
@@ -138,7 +138,14 @@ def getFeed(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-        
+
+#filtered list
+@api_view(['GET'])
+def getFilteredTrxns(request, id):
+    if request.method == "GET":
+        trxns = Trxn.objects.filter(toAccount=id) | Trxn.objects.filter(fromAccount=id)
+        serializer = TrxnSerializer(trxns, many=True)
+        return Response(serializer.data)
 
 #single transaction
 @api_view(['GET'])
@@ -149,7 +156,7 @@ def getTrxn(request, pk):
 
 #update transaction
 @api_view(['PUT'])
-@csrf_protect
+# @csrf_protect
 def updateTrxn(request, pk):
     trxn = get_object_or_404(Trxn, pk=pk)
     data = request.data
@@ -191,6 +198,7 @@ def getAccounts(request):
 
 
 @api_view(['PUT'])
+# @csrf_protect
 def updateAccount(request, pk):
     data = request.data
     account = Account.objects.get(id=pk)

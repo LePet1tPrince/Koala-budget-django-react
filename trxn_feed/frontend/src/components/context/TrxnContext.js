@@ -18,6 +18,7 @@ export function TrxnContext({ children }) {
 
     //State and variables
     const [trxns, setTrxns] = useState([])
+    const [filteredTrxns, setFilteredTrxns] = useState([])
     const [selectedTrxnId, setSelectedTrxnId] = useState()
 
     const selectedTrxn = trxns.find(trxn => trxn.id === selectedTrxnId)
@@ -29,14 +30,21 @@ export function TrxnContext({ children }) {
 
     //functions
     let getTrxns = async () => {
-        let response = await fetch(`${apiEndPoint}/api/feed/`)
+        let response = await fetch(`${apiEndPoint}/api/trxns/`)
         let trxnsData = await response.json()
         // console.log("transactions = ", trxnsData)
         setTrxns(trxnsData)
     }
 
+    // let getFilteredTrxns = async (id) => {
+    //     let response = await fetch(`${apiEndPoint}/api/trxns/${id}`)
+    //     let trxnsData = await response.json()
+    //     // console.log("transactions = ", trxnsData)
+    //     setTrxns(trxnsData)
+    // }
+
     let updateTrxns = async (trxn) => {
-        fetch(`${apiEndPoint}/api/feed/${trxn.id}/update`, {
+        fetch(`${apiEndPoint}/api/trxns/${trxn.id}/update`, {
             method: "PUT",
             headers: {
                 'Accept': 'application/json',
@@ -44,6 +52,14 @@ export function TrxnContext({ children }) {
                 'X-CSRFToken': csrftoken
             },
             body: JSON.stringify(trxn)
+        }).then ((response) => {
+            if (response.ok) {
+                alert('Transaction successfully updated')
+
+            }
+            else {
+                alert('there was an error saving the transaction')
+            }
         })
     }
 
@@ -79,7 +95,7 @@ export function TrxnContext({ children }) {
 
         };
         
-        fetch(`${apiEndPoint}/api/feed/`, {
+        fetch(`${apiEndPoint}/api/trxns/`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -100,7 +116,7 @@ export function TrxnContext({ children }) {
     }
 
     function handleTrxnDelete(id) {
-        fetch(`${apiEndPoint}/api/feed/${id}/delete`, {
+        fetch(`${apiEndPoint}/api/trxns/${id}/delete`, {
             method: 'DELETE',
             headers: {
                 'Content-Type' : 'application/json',
@@ -120,9 +136,11 @@ export function TrxnContext({ children }) {
     // values to get passed into context
     const TrxnsContextValue = {
         trxns,
+        filteredTrxns,
         selectedTrxn,
         selectedTrxnId,
         setTrxns,
+        // getFilteredTrxns,
         handleTrxnSelect,
         handleTrxnSubmit,
         handleTrxnChange,

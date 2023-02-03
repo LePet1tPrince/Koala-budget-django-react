@@ -64,7 +64,7 @@ def DashboardAPI(start_date, end_date):
     
     def createBarChartJSON(balance_dict, actualColor, budgetColor):
         data = []
-        print(Budget._meta.get_fields())
+        # print(Budget._meta.get_fields())
 
         for k in balance_dict:
             entry = {}

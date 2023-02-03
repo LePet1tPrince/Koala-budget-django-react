@@ -1,0 +1,16 @@
+.account-card {
+    width: 18rem;
+    
+    display: inline-block;
+    
+}
+
+.account-card :hover{
+    background-color: var(--info);
+    
+    
+}
+
+.btn-remove-styling {
+    all: unset;
+}
