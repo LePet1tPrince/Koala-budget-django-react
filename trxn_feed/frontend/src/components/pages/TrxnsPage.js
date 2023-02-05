@@ -41,7 +41,7 @@ const TrxnsPage = () => {
     <div className="sidebar-margin">
         <div className='feed-list'>
             <div className="p-5 m-5">
-            <div>
+            <div >
                   {displayCards.map(acc => {
                     return <OwnAccountCard key={acc.id} account={acc} setSelectedAccountName={setSelectedAccountName}/>
                   })}

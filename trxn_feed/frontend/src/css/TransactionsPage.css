@@ -1,7 +1,7 @@
 .account-card {
     width: 18rem;
     
-    display: inline-block;
+    /* display: inline-block; */
     
 }
 
@@ -14,3 +14,4 @@
 .btn-remove-styling {
     all: unset;
 }
+
