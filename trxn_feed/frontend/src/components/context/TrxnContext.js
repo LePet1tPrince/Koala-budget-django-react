@@ -49,16 +49,18 @@ export function TrxnContext({ children }) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'X-CSRFToken': csrftoken
+                // 'X-CSRFToken': csrftoken
             },
             body: JSON.stringify(trxn)
         }).then ((response) => {
             if (response.ok) {
+                getTrxns();
                 alert('Transaction successfully updated')
 
             }
             else {
                 alert('there was an error saving the transaction')
+                alert(JSON.stringify(trxn))
             }
         })
     }

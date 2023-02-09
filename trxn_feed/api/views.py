@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_protect
-from rest_framework import status
+from rest_framework import status, serializers
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework.parsers import JSONParser 
@@ -161,16 +161,17 @@ def updateTrxn(request, pk):
     trxn = get_object_or_404(Trxn, pk=pk)
     data = request.data
     trxn.date = data['date']
-    trxn.toAccount = Account.objects.get(pk=int(data['toAccount']))
+    # trxn.toAccount = Account.objects.get(pk=int(data['toAccount']))
+    trxn.toAccount = Account.objects.get(name=data['toAccount'])
     trxn.amount = data['amount']
-    trxn.fromAccount = Account.objects.get(pk=int(data['fromAccount']))
-
+    # trxn.fromAccount = Account.objects.get(pk=int(data['fromAccount']))
+    trxn.fromAccount = Account.objects.get(name=data['fromAccount'])
     trxn.notes = data['notes']
     trxn.save()
-    serlializer = TrxnSerializer(instance=trxn, data=data)
-    if serlializer.is_valid():
-        serlializer.save()
-        return Response(serlializer.data)
+    serializer = TrxnSerializer(instance=trxn, data=data)
+    if serializer.is_valid():
+        serializer.save()
+        return Response(serializer.data)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)    
 
 @api_view(['DELETE'])

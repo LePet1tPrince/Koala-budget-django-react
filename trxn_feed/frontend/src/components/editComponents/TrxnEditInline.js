@@ -9,7 +9,7 @@ import { useParams } from 'react-router-dom';
 
 function TrxnEditInline({ data }) {
 
-  const [editedTrxn, setEditedTrxn ] = useState();
+  const [editedTrxn, setEditedTrxn ] = useState(data);
   const [selectedTrxn, setSelectedTrxn ] = useState(data);
 
   useEffect(() => {
@@ -34,14 +34,16 @@ function TrxnEditInline({ data }) {
 
    function handleChange(changes) {
     setEditedTrxn({...editedTrxn, ...changes})
-    console.log({...editedTrxn})
+    console.log(JSON.stringify({...editedTrxn, ...changes}))
 
   }
 
    function handleSubmit(e, editedTrxn) {
     e.preventDefault();
-    console.log("edited Trxn:", editedTrxn);
-    handleTrxnSubmit(editedTrxn)
+    console.log("edited Trxn:", {...editedTrxn, fromAccount: findAccountId(editedTrxn.fromAccount), toAccount: findAccountId(editedTrxn.toAccount)});
+    // console.log("edited Trxn:", editedTrxn);
+
+    handleTrxnSubmit({...editedTrxn, fromAccount: findAccountId(editedTrxn.fromAccount), toAccount: findAccountId(editedTrxn.toAccount)})
     // alert('successfully submitted')
   }
   function findAccountId(name) {
@@ -50,18 +52,23 @@ function TrxnEditInline({ data }) {
     const index = accounts.findIndex(t => t.name === name)
     // alert(index)
     // alert(typeof(index))
+    if (index) {
+      console.log("index", index);
+      return accounts[index].id.toString()
 
-    return accounts[index].id.toString()
+
+    } else {
+      return name
+    }
+
   }
-  console.log(findAccountId('Credit Card'))
 
  
   return (
     <div >
-    {findAccountId("Credit Card")}
     <form onSubmit={(e) => handleSubmit(e, editedTrxn)}>
           <div className="form-group">
-            <label className="trxn-edit-form__label">Date</label>
+            {/* <label className="trxn-edit-form__label">Date</label> */}
             <input className="trxn-edit-form__input"
             type="date"
             name="date"
@@ -70,11 +77,11 @@ function TrxnEditInline({ data }) {
             ></input>
           </div>
           <div className="form-group">
-            <label className="trxn-edit-form__label">From</label>
+            {/* <label className="trxn-edit-form__label">From</label> */}
             <select className="trxn-edit-form__input" 
             name='fromAccount' 
             defaultValue={findAccountId(selectedTrxn.fromAccount)}
-            onChange={e => handleChange({fromAccount: e.target.value})}
+            onChange={e => handleChange({fromAccount: e.target.value.toString()})}
             >
               {accounts.sort((a,b) => a.num - b.num).map((account, index) => (
                 <option key={index} value={account.id}>{account.name}  - {account.subType}</option>
@@ -83,7 +90,7 @@ function TrxnEditInline({ data }) {
             </div>
          
           <div className="form-group">
-            <label className="trxn-edit-form__label">Amount</label>
+            {/* <label className="trxn-edit-form__label">Amount</label> */}
             <input className="trxn-edit-form__input" 
             type="currency" 
             name='amount' 
@@ -92,11 +99,11 @@ function TrxnEditInline({ data }) {
             ></input>
             </div>
             <div className="form-group">
-            <label className="trxn-edit-form__label">To</label>
+            {/* <label className="trxn-edit-form__label">To</label> */}
             <select className="trxn-edit-form__input" 
             name='toAccount' 
             defaultValue={findAccountId(selectedTrxn.toAccount)}
-            onChange={e => handleChange({toAccount: e.target.value})}
+            onChange={e => handleChange({toAccount: e.target.value.toString()})}
             >
                {accounts.sort((a,b) => a.num - b.num).map((account, index) => (
                 <option key={index} value={account.id}>{account.name} - {account.subType}</option>
@@ -104,7 +111,7 @@ function TrxnEditInline({ data }) {
             </select>
           </div>
           <div className="form-group">
-            <label className="trxn-edit-form__label">Notes</label>
+            {/* <label className="trxn-edit-form__label">Notes</label> */}
             <textarea className="trxn-edit-form__input" 
             name='notes' 
             defaultValue={selectedTrxn.notes}
@@ -112,7 +119,7 @@ function TrxnEditInline({ data }) {
             ></textarea>
             </div>
             <input type="submit"
-            className="trxn-edit-form__submit-btn btn btn-success" value="Submit"></input>
+            className="trxn-edit-form__submit-btn btn btn-success" value="Save"></input>
 
         </form>
 

@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('',views.getRoutes, name="routes"),
     path('trxns/', views.getTrxns, name="trxns"),
-    path('trxns/<str:id>', views.getFilteredTrxns, name="filtered-trxns"),
+    path('trxns/accounts/<str:id>', views.getFilteredTrxns, name="filtered-trxns"),
 
     path('trxns/<str:pk>', views.getTrxn, name="trxn"),
     path('trxns/<str:pk>/update', views.updateTrxn, name="update-trxn"),
