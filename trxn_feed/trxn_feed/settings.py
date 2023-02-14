@@ -137,5 +137,6 @@ CORS_ALLOWED_ORIGINS = [
     "https://frabjous-bavarois-1924d9.netlify.app",
     "https://frabjous-bavarois-1924d9.netlify.app",
     "http://18.116.243.208",
+    "https://koalabudget.benderbookconsulting.com",
 
 ]

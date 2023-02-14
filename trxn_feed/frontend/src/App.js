@@ -47,7 +47,7 @@ function App() {
             <SideBar />
             {/* <Header /> */}
             <Route path="/" exact component={HomePage} />
-            <Route path="/transactions" exact component={TrxnsPage} />
+            <Route path="/transactions" exact><TrxnsPage/></Route>
             {/* <Route path="/transactions/new" component={TrxnEdit} /> */}
             <Route path="/transactions/:id" component={TrxnEdit}  />
             <Route path="/transactions/:accid" component={TrxnsPage}  />
